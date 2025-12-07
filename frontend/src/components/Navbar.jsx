@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/img/Logo.png";
+//import Logo from "../assets/img/Logo.png";
 import TemaContext from "./App"; // Corrigido
 
 export default function Navbar() {
