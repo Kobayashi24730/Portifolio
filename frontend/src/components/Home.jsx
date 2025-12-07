@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {temaContext} from "./App.jsx";
+import {temaContext} from "../pages/App.jsx";
 
 export default function Home() {
 
