@@ -6,6 +6,6 @@ export default defineConfig({
   preview: {
     host: true,
     port: 10000,
-    allowedHosts: ['iaclear.onrender.com']
+    allowedHosts: ['portifolio-gf0n.onrender.com']
   }
 })
