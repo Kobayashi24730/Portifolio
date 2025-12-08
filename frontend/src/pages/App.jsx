@@ -13,7 +13,7 @@ export default function App() {
       <TemaContext.Provider value={{ tema, setTema }}>
         <Navbar />
         <Routes>
-          <Route path="/lar" element={<Home />} />
+          <Route path="/Lar" element={<Home />} />
         </Routes>
         <Footer />
       </TemaContext.Provider>
