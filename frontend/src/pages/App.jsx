@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../components/Home.jsx";
 import Navbar from "../components/Navbar.jsx";
 //import Footer from "../components/Footer.jsx"'
-import temaContext from "../components/TemaContext";
+import TemaContext from "../components/TemaContext";
 
 export default function App() {
-  const [Temar, setTemar] = useState("escuro");
+  const [temar, setTemar] = useState("escuro");
 
   return (
     <BrowserRouter>
