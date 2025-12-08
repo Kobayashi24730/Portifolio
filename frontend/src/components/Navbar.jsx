@@ -33,8 +33,8 @@ export default function Navbar() {
             <Link
               to={item.link}
               style={{
-                ...styles.item,
-                ...(hovered === item.nome ? styles.itemHovered : {}),
+                ...styles.item(tema),
+                ...(hovered === item.nome ? styles.itemHovered(tema) : {}),
               }}
               onMouseEnter={() => setHovered(item.nome)}
               onMouseLeave={() => setHovered(null)}
@@ -47,7 +47,7 @@ export default function Navbar() {
 
       <button
         onClick={() => setTema(tema === "escuro" ? "claro" : "escuro")}
-        style={styles.btn}
+        style={styles.btn(tema)}
       >
         Trocar tema
       </button>
