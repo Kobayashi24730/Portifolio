@@ -21,7 +21,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav style={styles.nav}>
+    <nav style={styles.nav(tema)}>
       <div style={styles.divTitle}>
         <img src={Logo} style={styles.img} alt="logo" />
         <h2 style={styles.title}>Kobayashi</h2>
@@ -53,4 +53,34 @@ export default function Navbar() {
       </button>
     </nav>
   );
-              }
+}
+
+const styles = {
+  nav: (tema) => ({
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "10px 20px",
+    backgroundColor: tema === "escuro" ? "#111" : "#eaeaea",
+    color: tema === "escuro" ? "#fff" : "#000",
+  }),
+  title: {
+    margin: 0,
+  },
+  item: {
+    textDecoration: "none",
+    transition: "0.3s ease",
+    color: tema === "escuro" ? "#ccc" : "#333",
+  },
+  itemHovered: {
+    color: tema === "escuro" ? "#fff" : "#000",
+  },
+  btn: (tema) => ({
+    background: tema === "escuro" ? "#333" : "#ddd",
+    color: tema === "escuro" ? "#fff" : "#000",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+  }),
+};
