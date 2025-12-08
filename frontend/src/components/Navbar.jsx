@@ -64,17 +64,40 @@ const styles = {
     backgroundColor: tema === "escuro" ? "#111" : "#eaeaea",
     color: tema === "escuro" ? "#fff" : "#000",
   }),
+
+  divTitle: {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+  },
+
+  img: {
+    width: "45px",
+    height: "45px",
+  },
+
   title: {
     margin: 0,
   },
-  item: {
+
+  ul: {
+    listStyle: "none",
+    display: "flex",
+    gap: "20px",
+  },
+
+  li: {},
+
+  item: (tema) => ({
     textDecoration: "none",
     transition: "0.3s ease",
     color: tema === "escuro" ? "#ccc" : "#333",
-  },
-  itemHovered: {
+  }),
+
+  itemHovered: (tema) => ({
     color: tema === "escuro" ? "#fff" : "#000",
-  },
+  }),
+
   btn: (tema) => ({
     background: tema === "escuro" ? "#333" : "#ddd",
     color: tema === "escuro" ? "#fff" : "#000",
