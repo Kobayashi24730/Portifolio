@@ -4,13 +4,14 @@ import Logo from "../assets/imgs/LogoEX.png";
 import TemaContext from "./TemaContext";
 
 export default function Navbar() {
+  const { tema, setTema } = useContext(TemaContext);
+  const [hovered, setHovered] = useState(null);
+
   useEffect(() => {
     document.body.style.margin = "0";
     document.body.style.padding = "0";
-  }, []);
-
-  const { tema, setTema } = useContext(TemaContext);
-  const [hovered, setHovered] = useState(null);
+    document.body.style.background = tema === "escuro" ? "#111" : "#fff";
+  }, [tema]);
 
   const items = [
     { nome: "Lar", link: "/Lar" },
@@ -45,56 +46,11 @@ export default function Navbar() {
       </ul>
 
       <button
-        onClick={() => setTema(temar === "escuro" ? "claro" : "escuro")}
+        onClick={() => setTema(tema === "escuro" ? "claro" : "escuro")}
         style={styles.btn}
       >
         Trocar tema
       </button>
     </nav>
   );
-}
-
-
-const styles = {
-  nav: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "10px 20px",
-    backgroundColor: "#111",
-  },
-  divTitle: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  img: {
-    width: "45px",
-    height: "45px",
-  },
-  title: {
-    color: "#fff",
-  },
-  ul: {
-    listStyle: "none",
-    display: "flex",
-    gap: "20px",
-  },
-  li: {},
-  item: {
-    textDecoration: "none",
-    color: "#ccc",
-    transition: "0.3s ease",
-  },
-  itemHovered: {
-    color: "#fff",
-  },
-  btn: {
-    background: "#333",
-    color: "#fff",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-  },
-};
+              }
