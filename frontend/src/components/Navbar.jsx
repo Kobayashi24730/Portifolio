@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/imgs/LogoEX.png";
-import { TemaContext } from "./TemaContext";
+import TemaContext from "./TemaContext";
 
 export default function Navbar() {
   useEffect(() => {
