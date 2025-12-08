@@ -9,7 +9,7 @@ export default function Navbar() {
     document.body.style.padding = "0";
   }, []);
 
-  const [tema, setTema] = useContext(TemaContext);
+  const { tema, setTema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
 
   const items = [
@@ -45,7 +45,7 @@ export default function Navbar() {
       </ul>
 
       <button
-        onClick={() => setTema(tema === "escuro" ? "claro" : "escuro")}
+        onClick={() => setTema(temar === "escuro" ? "claro" : "escuro")}
         style={styles.btn}
       >
         Trocar tema
