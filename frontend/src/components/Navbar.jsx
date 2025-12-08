@@ -64,7 +64,26 @@ const styles = {
     backgroundColor: tema === "escuro" ? "#111" : "#eaeaea",
     color: tema === "escuro" ? "#fff" : "#000",
   }),
-
+  title: {
+    margin: 0,
+  },
+  item: (tema) => ({
+    textDecoration: "none",
+    transition: "0.3s ease",
+    color: tema === "escuro" ? "#ccc" : "#333",
+  }),
+  itemHovered: (tema) => ({
+    color: tema === "escuro" ? "#fff" : "#000",
+  }),
+  btn: (tema) => ({
+    background: tema === "escuro" ? "#333" : "#ddd",
+    color: tema === "escuro" ? "#fff" : "#000",
+    border: "none",
+    padding: "8px 14px",
+    borderRadius: "6px",
+    cursor: "pointer",
+  }),
+  
   divTitle: {
     display: "flex",
     alignItems: "center",
@@ -76,10 +95,6 @@ const styles = {
     height: "45px",
   },
 
-  title: {
-    margin: 0,
-  },
-
   ul: {
     listStyle: "none",
     display: "flex",
@@ -88,22 +103,4 @@ const styles = {
 
   li: {},
 
-  item: (tema) => ({
-    textDecoration: "none",
-    transition: "0.3s ease",
-    color: tema === "escuro" ? "#ccc" : "#333",
-  }),
-
-  itemHovered: (tema) => ({
-    color: tema === "escuro" ? "#fff" : "#000",
-  }),
-
-  btn: (tema) => ({
-    background: tema === "escuro" ? "#333" : "#ddd",
-    color: tema === "escuro" ? "#fff" : "#000",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-  }),
 };
