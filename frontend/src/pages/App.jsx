@@ -10,7 +10,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <TemaContext.Provider value={{ Temar, setTemar }}>
+      <TemaContext.Provider value={{ temar, setTemar }}>
  
         <Navbar />
 
