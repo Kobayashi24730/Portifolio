@@ -74,8 +74,8 @@ export default function Home() {
             <button
               onClick={() => setAbaAtiva("codigo")}
               style={{
-                ...styles.aba,
-                ...(abaAtiva === "codigo" ? styles.abaAtiva : {})
+                ...styles.aba(tema),
+                ...(abaAtiva === "codigo" ? styles.abaAtiva(tema) : {})
               }}
             >
               Código
@@ -171,22 +171,23 @@ const styles = {
     gap: "10px",
   }),
   
-  aba: {
+  aba: (tema) => ({
     padding: "8px 14px",
     borderRadius: "6px",
     fontSize: "0.95rem",
-    color: "#aaa",
+    color: tema === "escuro" ? "#aaa" : "#444",
     background: "transparent",
     border: "none",
     cursor: "pointer",
-  },
-
-  abaAtiva: {
-    background: "#2d2d2d",
-    color: "#fff",
-    border: "1px solid #4a4a4a",
-  },
-
+    transition: "0.2s ease",
+  }),
+  
+  abaAtiva: (tema) => ({
+    background: tema === "escuro" ? "#2d2d2d" : "#dcdcdc",
+    color: tema === "escuro" ? "#fff" : "#000",
+    border: tema === "escuro" ? "1px solid #4a4a4a" : "1px solid #b4b4b4",
+  }),
+  
   btnDownload: {
     marginLeft: "auto",
     padding: "8px 16px",
@@ -200,10 +201,7 @@ const styles = {
 
   curriculoIMG: {
     width: "100%",
-    maxHeight: "800px",
-    display: "block",
-    objectFit: "contain",
-    background: "#ffffff10",
     animation: "fadeZoom 0.8s ease-out forwards",
-  },
+    display: "block",
+  }
 };
