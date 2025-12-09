@@ -6,24 +6,32 @@ export default function Home() {
   const { tema } = useContext(TemaContext);
   const [curriculoAberto, setCurriculoAberto] = useState(false);
   const [hovered, setHovered] = useState(null);
+  const [abaAtiva, setAbaAtiva] = useState("codigo");
 
   const BaixaCurriculo = () => {
     window.open("/curriculo.pdf", "_blank");
   };
 
-  const globalAnimations = `
-    @keyframes fadeInLeft {
-      0% { opacity: 0; transform: translateX(-40px); }
-      100% { opacity: 1; transform: translateX(0); }
-    }
-  `;
-  
   useEffect(() => {
     const styleSheet = document.createElement("style");
-    styleSheet.innerText = globalAnimations;
+    const preload = new Image();
+    preload.src = "/assets/imgs/MeuCurriculo.svg";
+    
+    styleSheet.innerText = `
+      @keyframes fadeZoom {
+        0% { opacity: 0; transform: scale(0.92); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+      @keyframes fadeZoom {
+        0% { opacity: 0; transform: translateY(14px) scale(0.94); filter: blur(4px); }
+        60% { opacity: .9; transform: translateY(0px) scale(1.02); filter: blur(1px); }
+        100% { opacity: 1; transform: scale(1); filter: blur(0); }
+      }
+    `;
     document.head.appendChild(styleSheet);
   }, []);
-
+  
+  
   const items = [
     { nome: "Contato", link: "/contato" },
     { nome: "Sobre", link: "/sobre" },
@@ -56,9 +64,7 @@ export default function Home() {
           }}
           onMouseEnter={() => setHovered("curriculo")}
           onMouseLeave={() => setHovered(null)}
-          onTouchStart={() => setHovered("curriculo")}
-          onTouchEnd={() => setHovered(null)}
-          onClick={() => setCurriculoAberto(true)}
+          onClick={() => setCurriculoAberto(!curriculoAberto)}
         >
           📁 Currículo
         </button>
@@ -66,28 +72,42 @@ export default function Home() {
 
       {curriculoAberto && (
         <div style={styles.curriculoBox}>
-          <div style={styles.topBar}>
-            <h2 style={styles.curriculoTitulo}>Meu Currículo</h2>
-            <p>Experiências, habilidades e certificações.</p>
+          
+          {/* Barra idêntica à da foto */}
+          <div style={styles.githubBar}>
+            <button
+              onClick={() => setAbaAtiva("codigo")}
+              style={{
+                ...styles.aba,
+                ...(abaAtiva === "codigo" ? styles.abaAtiva : {})
+              }}
+            >
+              Código
+            </button>
 
             <button
+              onClick={() => setAbaAtiva("culpa")}
               style={{
-                ...styles.btnDownload,
-                ...(hovered === "download" ? styles.hoveredDownload : {})
+                ...styles.aba,
+                ...(abaAtiva === "culpa" ? styles.abaAtiva : {})
               }}
-              onMouseEnter={() => setHovered("download")}
-              onMouseLeave={() => setHovered(null)}
+            >
+              Culpa
+            </button>
+
+            <button
+              style={styles.btnDownload}
               onClick={BaixaCurriculo}
             >
               ⬇️ Baixar
             </button>
           </div>
+
           <img
-            href="../assets/imgs/MeuCurriculo.svg"
-            alt="Curiculo(svg)"
-            style={styles.BoxCurriculo}
-          >
-          </img>
+            src="/assets/imgs/MeuCurriculo.svg"
+            alt="Currículo"
+            style={styles.curriculoIMG}
+          />
         </div>
       )}
     </div>
@@ -107,86 +127,87 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     gap: "40px",
-    animation: "fadeInLeft 1s ease forwards",
   }),
 
-  titulo: {
-    maxWidth: "900px",
-    textAlign: "center",
-    fontSize: "2.2rem",
-    animation: "fadeInLeft 1.2s ease forwards",
-  },
+  titulo: { maxWidth: "900px", textAlign: "center", fontSize: "2.2rem" },
 
-  options: {
-    display: "flex",
-    gap: "20px",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    animation: "fadeInLeft 1.4s ease forwards",
-  },
+  options: { display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" },
 
   botao: {
     padding: "14px 28px",
-    fontSize: "1.1rem",
     borderRadius: "10px",
     textDecoration: "none",
     background: "rgba(255,255,255,0.08)",
     color: "#fff",
     transition: "0.3s ease",
   },
-  
-  hovered: {
-    transform: "translateY(-4px)",
-    background: "rgba(255,255,255,0.25)",
-  },
 
-  /* Botão Currículo */
+  hovered: { transform: "translateY(-4px)", background: "rgba(255,255,255,0.25)" },
+
   btnCurriculo: {
     padding: "14px 30px",
     borderRadius: "10px",
     background: "#0070f3",
     color: "#fff",
     border: "none",
-    cursor: "pointer",
     fontSize: "1rem",
     transition: "0.3s",
   },
 
-  hoveredCurriculo: {
-    transform: "scale(1.05)",
-    background: "#3294ff",
-  },
+  hoveredCurriculo: { transform: "scale(1.05)", background: "#3294ff" },
 
-  /* Caixa estilo GitHub */
   curriculoBox: {
     width: "90%",
-    maxWidth: "800px",
-    background: "rgba(255,255,255,0.09)",
-    backdropFilter: "blur(10px)",
+    maxWidth: "900px",
+    background: "rgba(255,255,255,0.1)",
     borderRadius: "10px",
-    border: "1px solid rgba(255,255,255,0.2)",
-    animation: "fadeInLeft 1s ease forwards",
+    border: "1px solid rgba(255,255,255,0.15)",
+    overflow: "hidden",
+    animation: "fadeZoom 0.7s ease-out forwards",
   },
 
-  topBar: {
+  githubBar: {
+    background: "#1f1f1f",
+    borderBottom: "1px solid #444",
+    padding: "10px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "space-between",
-    padding: "18px 22px",
-    borderBottom: "1px solid rgba(255,255,255,0.15)",
+    gap: "10px",
+  },
+
+  aba: {
+    padding: "8px 14px",
+    borderRadius: "6px",
+    fontSize: "0.95rem",
+    color: "#aaa",
+    background: "transparent",
+    border: "none",
+    cursor: "pointer",
+  },
+
+  abaAtiva: {
+    background: "#2d2d2d",
+    color: "#fff",
+    border: "1px solid #4a4a4a",
   },
 
   btnDownload: {
-    padding: "10px 18px",
-    borderRadius: "8px",
-    border: "none",
+    marginLeft: "auto",
+    padding: "8px 16px",
+    borderRadius: "6px",
     background: "#fff",
     color: "#000",
     fontWeight: "600",
+    border: "none",
+    cursor: "pointer",
   },
 
-  hoveredDownload: {
-    background: "#e3e3e3",
-    transform: "translateY(-2px)",
+  curriculoIMG: {
+    width: "100%",
+    maxHeight: "800px",
+    display: "block",
+    objectFit: "contain",
+    background: "#ffffff10",
+    animation: "fadeZoom 0.8s ease-out forwards",
   },
 };
