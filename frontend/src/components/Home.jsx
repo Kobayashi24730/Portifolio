@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
+import MeuCurriculo from "../assets/imgs/MeuCurriculo.svg";
 
 export default function Home() {
   const { tema } = useContext(TemaContext);
@@ -15,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const styleSheet = document.createElement("style");
     const preload = new Image();
-    preload.src = "./assets/imgs/MeuCurriculo.svg";
+    preload.src = "/assets/imgs/MeuCurriculo.svg";
     
     styleSheet.innerText = `
       @keyframes fadeZoom {
@@ -100,7 +101,7 @@ export default function Home() {
           </div>
 
           <img
-            src="/assets/imgs/MeuCurriculo.svg"
+            src={MeuCurriculo}
             alt="Currículo"
             style={styles.curriculoIMG}
           />
