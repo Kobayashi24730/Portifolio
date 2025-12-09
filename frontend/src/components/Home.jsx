@@ -83,8 +83,8 @@ export default function Home() {
             </button>
           </div>
           <img
-            href="../assets/imgs/MeuCurriculo.png"
-            alt=""
+            href="../assets/imgs/MeuCurriculo.svg"
+            alt="Curiculo(svg)"
             style={styles.BoxCurriculo}
           >
           </img>
