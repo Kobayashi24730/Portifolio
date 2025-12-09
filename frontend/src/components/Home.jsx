@@ -22,7 +22,7 @@ export default function Home() {
   }
   `;
 
-  
+  const [CurriculoAberto, AbrirCurriculo] = useState(null);
   const [hovered, setHovered] = useState(null);
 
   useEffect(() => {
@@ -64,6 +64,23 @@ export default function Home() {
             {item.nome}
           </Link>
         ))}
+      </div>
+      <div style={styles.Curriculo}>
+        <div style={styles.TopoCurriculo}>
+          <h2>Este e meu curriculo nele consta minhas Habilidade e ....</h2>
+          <button styles={{
+              ...styles.botao,
+              ...(Hovered === true ? styles.Hovered : {}),
+            }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(null)}
+            onTouchStart={() => setHovered(true)}
+            onTouchEnd={() => setHovered(null)}
+            onClick={() => AbrirCurriculo(True)}
+          >
+            ⬇️ Baixa Curriculo
+          </button>
+        </div>
       </div>
     </div>
   );
