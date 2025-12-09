@@ -19,10 +19,6 @@ export default function Home() {
     
     styleSheet.innerText = `
       @keyframes fadeZoom {
-        0% { opacity: 0; transform: scale(0.92); }
-        100% { opacity: 1; transform: scale(1); }
-      }
-      @keyframes fadeZoom {
         0% { opacity: 0; transform: translateY(14px) scale(0.94); filter: blur(4px); }
         60% { opacity: .9; transform: translateY(0px) scale(1.02); filter: blur(1px); }
         100% { opacity: 1; transform: scale(1); filter: blur(0); }
@@ -74,7 +70,7 @@ export default function Home() {
         <div style={styles.curriculoBox}>
           
           {/* Barra idêntica à da foto */}
-          <div style={styles.githubBar}>
+          <div style={styles.githubBar(tema)}>
             <button
               onClick={() => setAbaAtiva("codigo")}
               style={{
@@ -166,15 +162,15 @@ const styles = {
     animation: "fadeZoom 0.7s ease-out forwards",
   },
 
-  githubBar: {
-    background: "#1f1f1f",
-    borderBottom: "1px solid #444",
+  githubBar: (tema) => ({
+    background: tema === "escuro" ? "#1f1f1f" : "#e6e6e6",
+    borderBottom: tema === "escuro" ? "1px solid #444" : "1px solid #cfcfcf",
     padding: "10px",
     display: "flex",
     alignItems: "center",
     gap: "10px",
-  },
-
+  }),
+  
   aba: {
     padding: "8px 14px",
     borderRadius: "6px",
