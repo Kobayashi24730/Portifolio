@@ -84,7 +84,7 @@ export default function Home() {
             <button
               onClick={() => setAbaAtiva("culpa")}
               style={{
-                ...styles.aba,
+                ...styles.aba(tema),
                 ...(abaAtiva === "culpa" ? styles.abaAtiva : {})
               }}
             >
