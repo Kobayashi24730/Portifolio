@@ -7,22 +7,16 @@ export default function Home() {
   const [curriculoAberto, setCurriculoAberto] = useState(false);
   const [hovered, setHovered] = useState(null);
 
+  const BaixaCurriculo = () => {
+    window.open("/curriculo.pdf", "_blank");
+  };
+
   const globalAnimations = `
     @keyframes fadeInLeft {
       0% { opacity: 0; transform: translateX(-40px); }
       100% { opacity: 1; transform: translateX(0); }
     }
-  
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-  
-    @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-`;
+  `;
   
   useEffect(() => {
     const styleSheet = document.createElement("style");
@@ -37,9 +31,7 @@ export default function Home() {
 
   return (
     <div style={styles.div(tema)}>
-      <h1 style={styles.titulo}>
-        Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.
-      </h1>
+      <h1 style={styles.titulo}>Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.</h1>
 
       <div style={styles.options}>
         {items.map((item) => (
@@ -48,7 +40,7 @@ export default function Home() {
             to={item.link}
             style={{
               ...styles.botao,
-              ...(hovered === item.nome ? styles.hovered : {}),
+              ...(hovered === item.nome ? styles.hovered : {})
             }}
             onMouseEnter={() => setHovered(item.nome)}
             onMouseLeave={() => setHovered(null)}
@@ -56,46 +48,45 @@ export default function Home() {
             {item.nome}
           </Link>
         ))}
+
         <button 
           style={{
-            ...style={styles.btnCurriculo},
-            ...(Hovered === true ? styles.Hovered: {}),
+            ...styles.btnCurriculo,
+            ...(hovered === "curriculo" ? styles.hoveredCurriculo : {})
           }}
-          onClick={() => setCurriculoAberto(true)}
-          onMouseEnter={() => setHovered(true)}
+          onMouseEnter={() => setHovered("curriculo")}
           onMouseLeave={() => setHovered(null)}
-          onTouchEnter={() => setHovered(true)}
+          onTouchStart={() => setHovered("curriculo")}
           onTouchEnd={() => setHovered(null)}
+          onClick={() => setCurriculoAberto(true)}
         >
-          Curriculo
+          📁 Currículo
         </button>
       </div>
 
       {curriculoAberto && (
-        /// esssa parte deve ser como uma barra parecida con abarra superrior da zona onde se encontra um codigo no github onde tem algumas informacoes e o botao de baixar editar e etc.
         <div style={styles.curriculoBox}>
-          <h2 style={styles.curriculoTitulo}>📁 Meu Currículo</h2>
-          <p style={styles.curriculoTexto}>
-            Aqui você encontra minhas habilidades, experiências e certificações.
-          </p>
-  
-          <button
-            style={{
-              ...style={styles.btnCurriculo},
-              ...(Hovered === true ? styles,Hovered : {}),
-            }}
-            onClick={() => BaixaCurriculo()}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(null)}
-          >
-            ⬇️
-          </button>
+          <div style={styles.topBar}>
+            <h2 style={styles.curriculoTitulo}>Meu Currículo</h2>
+            <p>Experiências, habilidades e certificações.</p>
+
+            <button
+              style={{
+                ...styles.btnDownload,
+                ...(hovered === "download" ? styles.hoveredDownload : {})
+              }}
+              onMouseEnter={() => setHovered("download")}
+              onMouseLeave={() => setHovered(null)}
+              onClick={BaixaCurriculo}
+            >
+              ⬇️ Baixar
+            </button>
+          </div>
         </div>
       )}
     </div>
   );
 }
-
 
 const styles = {
   div: (tema) => ({
@@ -117,10 +108,6 @@ const styles = {
     maxWidth: "900px",
     textAlign: "center",
     fontSize: "2.2rem",
-    lineHeight: "1.4",
-    fontWeight: "600",
-    textShadow: "0 0 10px #ffffff20",
-    opacity: 0,
     animation: "fadeInLeft 1.2s ease forwards",
   },
 
@@ -137,51 +124,63 @@ const styles = {
     fontSize: "1.1rem",
     borderRadius: "10px",
     textDecoration: "none",
+    background: "rgba(255,255,255,0.08)",
     color: "#fff",
-    background: "rgba(255,255,255,0.07)",
-    border: "1px solid rgba(255,255,255,0.15)",
-    backdropFilter: "blur(6px)",
-    transition: "all .25s ease",
+    transition: "0.3s ease",
   },
-
+  
   hovered: {
-    transform: "translateY(-4px) scale(1.03)",
-    background: "rgba(255,255,255,0.15)",
-    border: "1px solid rgba(255,255,255,0.3)",
-    boxShadow: "0 0 15px rgba(255,255,255,0.2)",
+    transform: "translateY(-4px)",
+    background: "rgba(255,255,255,0.25)",
   },
 
-  /* --- CURRÍCULO SECTION --- */
-  curriculoBox: {
-    width: "80%",
-    maxWidth: "700px",
-    padding: "25px",
-    borderRadius: "14px",
-    backdropFilter: "blur(12px)",
-    background: "rgba(255, 255, 255, 0.08)",
-    border: "1px solid rgba(255, 255, 255, 0.15)",
-    textAlign: "center",
-    animation: "fadeInLeft 1.6s ease forwards",
-  },
-
-  curriculoTitulo: {
-    marginBottom: "12px",
-    fontSize: "1.6rem",
-  },
-
-  curriculoTexto: {
-    opacity: "0.8",
-    marginBottom: "20px",
-  },
-
+  /* Botão Currículo */
   btnCurriculo: {
-    padding: "12px 25px",
-    fontSize: "1.1rem",
+    padding: "14px 30px",
     borderRadius: "10px",
+    background: "#0070f3",
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "1rem",
+    transition: "0.3s",
+  },
+
+  hoveredCurriculo: {
+    transform: "scale(1.05)",
+    background: "#3294ff",
+  },
+
+  /* Caixa estilo GitHub */
+  curriculoBox: {
+    width: "90%",
+    maxWidth: "800px",
+    background: "rgba(255,255,255,0.09)",
+    backdropFilter: "blur(10px)",
+    borderRadius: "10px",
+    border: "1px solid rgba(255,255,255,0.2)",
+    animation: "fadeInLeft 1s ease forwards",
+  },
+
+  topBar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "18px 22px",
+    borderBottom: "1px solid rgba(255,255,255,0.15)",
+  },
+
+  btnDownload: {
+    padding: "10px 18px",
+    borderRadius: "8px",
     border: "none",
     background: "#fff",
     color: "#000",
-    cursor: "pointer",
-    transition: "0.3s ease",
+    fontWeight: "600",
+  },
+
+  hoveredDownload: {
+    background: "#e3e3e3",
+    transform: "translateY(-2px)",
   },
 };
