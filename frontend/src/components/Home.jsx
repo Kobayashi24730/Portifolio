@@ -82,6 +82,12 @@ export default function Home() {
               ⬇️ Baixar
             </button>
           </div>
+          <img
+            href="../assets/imgs/MeuCurriculo.png"
+            alt=""
+            style={styles.BoxCurriculo}
+          >
+          </img>
         </div>
       )}
     </div>
