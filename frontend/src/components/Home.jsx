@@ -56,23 +56,42 @@ export default function Home() {
             {item.nome}
           </Link>
         ))}
-      </div>
-
-      <div style={styles.curriculoBox}>
-        <h2 style={styles.curriculoTitulo}>📁 Meu Currículo</h2>
-        <p style={styles.curriculoTexto}>
-          Aqui você encontra minhas habilidades, experiências e certificações.
-        </p>
-
-        <button
-          style={styles.btnCurriculo}
+        <button 
+          style={{
+            ...style={styles.btnCurriculo},
+            ...(Hovered === true ? styles.Hovered: {}),
+          }}
           onClick={() => setCurriculoAberto(true)}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(null)}
+          onTouchEnter={() => setHovered(true)}
+          onTouchEnd={() => setHovered(null)}
         >
-          ⬇️ Baixar Currículo PDF
+          Curriculo
         </button>
       </div>
+
+      {curriculoAberto && (
+        /// esssa parte deve ser como uma barra parecida con abarra superrior da zona onde se encontra um codigo no github onde tem algumas informacoes e o botao de baixar editar e etc.
+        <div style={styles.curriculoBox}>
+          <h2 style={styles.curriculoTitulo}>📁 Meu Currículo</h2>
+          <p style={styles.curriculoTexto}>
+            Aqui você encontra minhas habilidades, experiências e certificações.
+          </p>
+  
+          <button
+            style={{
+              ...style={styles.btnCurriculo},
+              ...(Hovered === true ? styles,Hovered : {}),
+            }}
+            onClick={() => BaixaCurriculo()}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(null)}
+          >
+            ⬇️
+          </button>
+        </div>
+      )}
     </div>
   );
 }
