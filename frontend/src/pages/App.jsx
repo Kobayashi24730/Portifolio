@@ -14,7 +14,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route path="/Lar" element={<Home />} />
-          <Route path="/Sobre" element={<Sobre />}
+          <Route path="/Sobre" element={<Sobre />} />
         </Routes>
         <Footer />
       </TemaContext.Provider>
