@@ -5,34 +5,62 @@ export default function Sobre() {
   const { tema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
 
-  const estagio = [
-    {
-      titulo: "Criação de automação de sistema de monitoramento em tempo real",
-      text: "Utilizei linguagens como C/C++, Node.js e Java. O sistema monitora o local identificando anomalias (como alguém não autorizado) e movimentos suspeitos, enviando alertas automaticamente para o administrador."
-    },
-    {
-      titulo: "Desenvolvimento de sistema de mapeamento de terreno",
-      text: "Utilizei C, C++ e C# na criação e testes do sistema em campo. O projeto foi inscrito e premiado em primeiro lugar em competição."
-    },
-    {
-      titulo: "Sistema para monitoramento/processamento de dados agrícolas",
-      text: "Feito em C/C++, Python, React, JavaScript e frameworks como Flutter, jQuery e AJAX, com banco de dados. A estação coleta dados que são processados e exibidos em planilhas e dashboards administrativos."
-    },
-    {
-      titulo: "Aplicativo mobile/desktop para alertas agrícolas",
-      text: "Desenvolvido em XML/Java (Android) e .NET MAUI/Xamarin (desktop). Envia alertas quando parâmetros são ultrapassados, possui área administrativa segura e painel de testes."
-    }
-  ];
-
+  const Habilidades = [
+  {
+    titulo: "HTML",
+    text: "Estruturo páginas da web de forma organizada, semântica e otimizada."
+  },
+  {
+    titulo: "CSS",
+    text: "Crio interfaces responsivas e modernas usando boas práticas de layout e design."
+  },
+  {
+    titulo: "JavaScript / TypeScript",
+    text: "Desenvolvo funcionalidades dinâmicas e escaláveis no front-end e back-end."
+  },
+  {
+    titulo: "Frameworks JS (AJAX, jQuery, React Native, Node.js)",
+    text: "Experiência com consumo de APIs, manipulação de DOM e desenvolvimento móvel e servidor."
+  },
+  {
+    titulo: "Flutter",
+    text: "Desenvolvo aplicativos multiplataforma com UI fluida e ótima performance."
+  },
+  {
+    titulo: "Python",
+    text: "Crio automações, APIs REST, scripts e projetos de análise e integração."
+  },
+  {
+    titulo: "API Restful",
+    text: "Desenho e consumo APIs organizadas, seguras e bem estruturadas."
+  },
+  {
+    titulo: ".NET MAUI / Xamarin",
+    text: "Desenvolvimento de apps nativos multiplataforma com C# de forma unificada."
+  },
+  {
+    titulo: "C / C++",
+    text: "Domínio de lógica, ponteiros e desenvolvimento de sistemas de alto desempenho."
+  },
+  {
+    titulo: "Java",
+    text: "Aplicações robustas, APIs e lógica orientada a objetos."
+  },
+  {
+    titulo: "XML",
+    text: "Estruturação de dados, configurações e integração entre sistemas."
+  },
+  {
+    titulo: "Habilidades com I.A.",
+    text: "Uso IA para automações, análise de dados, criação de sistemas inteligentes e melhora de produtividade."
+  },
+];
   return (
     <div style={styles.container(tema)}>
       <div style={styles.sobreMim(tema)}>
-        <h2>Olá! Sou Kobayashi</h2>
+        <h2>Olá! Aqui jas um pouco sobre minhas Habilidades</h2>
         <p>
-          Sou desenvolvedor web/mobile e também crio aplicações desktop.
-          Sou criativo, curioso e apaixonado por tecnologia.  
-          Minha jornada começou há 5 anos quando decidi criar meu primeiro servidor de jogos.  
-          Desde então me apaixonei pelo mundo da programação e sigo evoluindo diariamente.
+          
         </p>
 
         <div style={styles.btns}>
@@ -41,7 +69,7 @@ export default function Sobre() {
         </div>
       </div>
       <div style={styles.lista}>
-        {estagio.map((item) => (
+        {Habilidades.map((item) => (
           <div
             key={item.titulo}
             style={{
