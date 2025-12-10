@@ -4,6 +4,7 @@ import Home from "../components/Home.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import TemaContext from "../components/TemaContext";
+import Sobre from "../components/Sobre";
 
 export default function App() {
   const [tema, setTema] = useState("escuro");
