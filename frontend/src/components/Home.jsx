@@ -114,95 +114,139 @@ export default function Home() {
 const styles = {
   div: (tema) => ({
     minHeight: "100vh",
-    background: tema === "escuro"
-      ? "linear-gradient(145deg, #0b0b0b, #111, #1a1a1a)"
-      : "linear-gradient(145deg, #f3f3f3, #e6e6e6)",
     padding: "40px",
-    color: tema === "escuro" ? "#ffffff" : "#000",
+    color: tema === "escuro" ? "#fff" : "#000",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     gap: "40px",
+
+    background:
+      tema === "escuro"
+        ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
+        : "linear-gradient(135deg, #e7e7e7, #ffffff)",
+
+    transition: "0.3s ease",
   }),
 
-  titulo: { maxWidth: "900px", textAlign: "center", fontSize: "2.2rem" },
+  titulo: {
+    maxWidth: "900px",
+    textAlign: "center",
+    fontSize: "2.4rem",
+    lineHeight: "1.4",
+    textShadow: "0 0 10px rgba(120,150,255,0.35)",
+    animation: "fadeIn 0.9s ease",
+  },
 
-  options: { display: "flex", gap: "20px", flexWrap: "wrap", justifyContent: "center" },
+  options: {
+    display: "flex",
+    gap: "20px",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  },
 
   botao: {
-    padding: "14px 28px",
-    borderRadius: "10px",
+    padding: "14px 32px",
+    borderRadius: "12px",
     textDecoration: "none",
-    background: "rgba(255,255,255,0.08)",
-    color: "#fff",
-    transition: "0.3s ease",
+    background: "rgba(255,255,255,0.05)",
+    backdropFilter: "blur(6px)",
+    color: "#c7d8ff",
+    border: "1px solid rgba(110,140,255,0.2)",
+    transition: "0.25s ease",
+    boxShadow: "0 0 8px rgba(120,150,255,0.2)",
   },
 
-  hovered: { transform: "translateY(-4px)", background: "rgba(255,255,255,0.25)" },
+  hovered: {
+    transform: "translateY(-4px)",
+    background: "rgba(255,255,255,0.18)",
+    boxShadow: "0 0 25px rgba(90,120,255,0.35)",
+  },
 
   btnCurriculo: {
-    padding: "14px 30px",
-    borderRadius: "10px",
-    background: "#0070f3",
+    padding: "14px 34px",
+    borderRadius: "12px",
+    background: "linear-gradient(135deg, #2563eb, #4589ff)",
     color: "#fff",
     border: "none",
-    fontSize: "1rem",
-    transition: "0.3s",
+    fontSize: "1.05rem",
+    fontWeight: "600",
+    transition: "0.25s ease",
+    boxShadow: "0 0 12px rgba(37, 99, 235, 0.5)",
   },
 
-  hoveredCurriculo: { transform: "scale(1.05)", background: "#3294ff" },
+  hoveredCurriculo: {
+    transform: "scale(1.07)",
+    boxShadow: "0 0 28px rgba(37, 99, 235, 0.8)",
+  },
 
   curriculoBox: {
     width: "90%",
-    maxWidth: "900px",
-    background: "rgba(255,255,255,0.1)",
-    borderRadius: "10px",
-    border: "1px solid rgba(255,255,255,0.15)",
+    maxWidth: "950px",
+    borderRadius: "14px",
+    background: "rgba(255,255,255,0.06)",
+    backdropFilter: "blur(12px)",
+    border: "1px solid rgba(120,150,255,0.25)",
+
+    boxShadow: "0 0 25px rgba(120,150,255,0.25)",
     overflow: "hidden",
     animation: "fadeZoom 0.7s ease-out forwards",
   },
 
   githubBar: (tema) => ({
-    background: tema === "escuro" ? "#1f1f1f" : "#e6e6e6",
-    borderBottom: tema === "escuro" ? "1px solid #444" : "1px solid #cfcfcf",
-    padding: "10px",
+    background: tema === "escuro" ? "rgba(15,15,20,0.7)" : "#e5e5e5",
+    padding: "12px 14px",
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
+    borderBottom:
+      tema === "escuro"
+        ? "1px solid rgba(120,150,255,0.2)"
+        : "1px solid #ccc",
+    backdropFilter: "blur(10px)",
   }),
+
   
   aba: (tema) => ({
-    padding: "8px 14px",
-    borderRadius: "6px",
+    padding: "8px 16px",
+    borderRadius: "8px",
     fontSize: "0.95rem",
-    color: tema === "escuro" ? "#aaa" : "#444",
     background: "transparent",
-    border: "none",
+    color: tema === "escuro" ? "#aab4ff" : "#333",
+    border: "1px solid transparent",
     cursor: "pointer",
     transition: "0.2s ease",
   }),
-  
+
   abaAtiva: (tema) => ({
-    background: tema === "escuro" ? "#2d2d2d" : "#dcdcdc",
+    background: tema === "escuro" ? "rgba(120,150,255,0.16)" : "#d4d4d4",
     color: tema === "escuro" ? "#fff" : "#000",
-    border: tema === "escuro" ? "1px solid #4a4a4a" : "1px solid #b4b4b4",
+    border:
+      tema === "escuro"
+        ? "1px solid rgba(150,180,255,0.35)"
+        : "1px solid #999",
+    boxShadow:
+      tema === "escuro"
+        ? "0 0 12px rgba(120,150,255,0.4)"
+        : "0 0 10px rgba(180,180,180,0.4)",
   }),
+
   
   btnDownload: {
     marginLeft: "auto",
-    padding: "8px 16px",
-    borderRadius: "6px",
-    background: "#fff",
-    color: "#000",
-    fontWeight: "600",
-    border: "none",
+    padding: "8px 18px",
+    background: "linear-gradient(135deg, #fff, #ddd)",
+    borderRadius: "8px",
+    fontWeight: "700",
     cursor: "pointer",
+    transition: "0.2s ease",
+    border: "none",
   },
 
   curriculoIMG: {
     width: "100%",
-    animation: "fadeZoom 0.8s ease-out forwards",
     display: "block",
-  }
+    animation: "fadeZoom 0.8s ease-out forwards",
+  },
 };
