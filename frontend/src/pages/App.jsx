@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import TemaContext from "../components/TemaContext";
 import Sobre from "../components/Sobre";
+import Habilidades from "../components/Habilidades";
 
 export default function App() {
   const [tema, setTema] = useState("escuro");
