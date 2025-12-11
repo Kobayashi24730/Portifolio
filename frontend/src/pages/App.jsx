@@ -18,7 +18,7 @@ export default function App() {
           <Route path="/Lar" element={<Home />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Habilidades" element={<Habilidades />} />
-          <Route path="/Contato" element={<Contato />}/>
+          <Route path="/Contato" element={<Contato />} />
         </Routes>
         <Footer />
       </TemaContext.Provider>
