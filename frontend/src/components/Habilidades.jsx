@@ -25,18 +25,7 @@ export default function Habilidades() {
   const { tema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  const Habilidades = [
+  const HabilidadesLista = [
     {
       titulo: "HTML",
       text: "Estruturo páginas da web de forma organizada e semântica.",
@@ -100,48 +89,58 @@ export default function Habilidades() {
   ];
 
   return (
-    <div style={styles.container(tema)}>
-      <div style={styles.sobreMim(tema)}>
-        <h2>Minhas Habilidades</h2>
-        <p>
-          Aqui está um resumo das principais tecnologias e ferramentas com as quais trabalho.
-        </p>
+    <>
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
 
-        <div style={styles.btns}>
-          <button style={styles.btn(tema)}>Contato</button>
-          <button style={styles.btn(tema)}>Lar</button>
+      <div style={styles.container(tema)}>
+        <div style={styles.sobreMim(tema)}>
+          <h2>Minhas Habilidades</h2>
+          <p>Aqui está um resumo das principais tecnologias que uso.</p>
+
+          <div style={styles.btns}>
+            <button style={styles.btn(tema)}>Contato</button>
+            <button style={styles.btn(tema)}>Lar</button>
+          </div>
+        </div>
+
+        <div style={styles.lista}>
+          {HabilidadesLista.map((item) => (
+            <div
+              key={item.titulo}
+              style={{
+                ...styles.card(tema),
+                ...(hovered === item.titulo ? styles.cardHover(tema) : {}),
+              }}
+              onMouseEnter={() => setHovered(item.titulo)}
+              onMouseLeave={() => setHovered(null)}
+              onTouchStart={() => setHovered(item.titulo)}
+              onTouchEnd={() => setHovered(null)}
+            >
+              <div style={styles.iconBox}>{item.icon}</div>
+              <h2 style={styles.titulo}>{item.titulo}</h2>
+              <p style={styles.text}>{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
-
-      <div style={styles.lista}>
-        {Habilidades.map((item) => (
-          <div
-            key={item.titulo}
-            style={{
-              ...styles.card(tema),
-              ...(hovered === item.titulo ? styles.cardHover(tema) : {}),
-            }}
-            onMouseEnter={() => setHovered(item.titulo)}
-            onMouseLeave={() => setHovered(null)}
-            onTouchStart={() => setHovered(item.titulo)}
-            onTouchEnd={() => setHovered(null)}
-          >
-            <div style={styles.iconBox}>{item.icon}</div>
-            <h2 style={styles.titulo}>{item.titulo}</h2>
-            <p style={styles.text}>{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
 
 const styles = {
   container: (tema) => ({
     padding: "40px 20px",
-    background: tema === "escuro"
-      ? "linear-gradient(180deg, #0a0a0a, #111, #0a0a0a)"
-      : "linear-gradient(180deg, #f4f4f4, #fff, #f4f4f4)",
+    background:
+      tema === "escuro"
+        ? "linear-gradient(180deg, #0a0a0a, #111, #0a0a0a)"
+        : "linear-gradient(180deg, #f4f4f4, #fff, #f4f4f4)",
     color: tema === "escuro" ? "white" : "#222",
     minHeight: "100vh",
     transition: "0.4s ease",
@@ -150,13 +149,13 @@ const styles = {
   sobreMim: (tema) => ({
     padding: "25px",
     borderRadius: "14px",
-    background: tema === "escuro"
-      ? "rgba(20, 20, 20, 0.7)"
-      : "rgba(255, 255, 255, 0.7)",
+    background:
+      tema === "escuro" ? "rgba(20,20,20,0.7)" : "rgba(255,255,255,0.7)",
     backdropFilter: "blur(8px)",
-    boxShadow: tema === "escuro"
-      ? "0 0 25px rgba(255,255,255,0.06)"
-      : "0 0 25px rgba(0,0,0,0.1)",
+    boxShadow:
+      tema === "escuro"
+        ? "0 0 25px rgba(255,255,255,0.06)"
+        : "0 0 25px rgba(0,0,0,0.1)",
     transition: "0.4s",
   }),
 
@@ -188,16 +187,17 @@ const styles = {
   card: (tema) => ({
     padding: "25px",
     borderRadius: "16px",
-    background: tema === "escuro"
-      ? "rgba(18, 18, 18, 0.6)"
-      : "rgba(255,255,255,0.8)",
+    background:
+      tema === "escuro"
+        ? "rgba(18,18,18,0.6)"
+        : "rgba(255,255,255,0.8)",
     backdropFilter: "blur(5px)",
     border: "1px solid rgba(255,255,255,0.07)",
     boxShadow:
       tema === "escuro"
         ? "0 8px 20px rgba(255,255,255,0.06)"
         : "0 8px 20px rgba(0,0,0,0.12)",
-    transition: "0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+    transition: "0.35s cubic-bezier(0.4,0,0.2,1)",
     textAlign: "center",
     transform: "scale(1)",
     opacity: 0,
@@ -208,7 +208,7 @@ const styles = {
     transform: "scale(1.05) translateY(-8px)",
     boxShadow:
       tema === "escuro"
-        ? "0 0 35px rgba(0, 255, 200, 0.25)"
+        ? "0 0 35px rgba(0,255,200,0.25)"
         : "0 0 25px rgba(0,0,0,0.25)",
     borderColor:
       tema === "escuro"
@@ -230,10 +230,5 @@ const styles = {
   text: {
     fontSize: "15px",
     lineHeight: "1.4",
-  },
-
-  "@keyframes fadeIn": {
-    from: { opacity: 0, transform: "translateY(10px)" },
-    to: { opacity: 1, transform: "translateY(0)" },
   },
 };
