@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import TemaContext from "./TemaContext";
+
 import {
   FaHtml5,
   FaCss3Alt,
@@ -7,16 +8,34 @@ import {
   FaReact,
   FaPython,
   FaCode,
-  FaCuttlefish,
   FaJava,
 } from "react-icons/fa";
-import { SiTypescript, SiFlutter, SiXamarin, SiDotnet, SiCplusplus, SiXml } from "react-icons/si";
+
+import {
+  SiTypescript,
+  SiFlutter,
+  SiDotnet,
+  SiCplusplus,
+  SiXml,
+} from "react-icons/si";
+
 import { MdOutlineSmartToy } from "react-icons/md";
 
 export default function Habilidades() {
   const { tema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
 
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
   const Habilidades = [
     {
       titulo: "HTML",
@@ -56,7 +75,7 @@ export default function Habilidades() {
     {
       titulo: ".NET MAUI / Xamarin",
       text: "Apps multiplataforma nativos usando C#.",
-      icon: <SiXamarin size={45} color="#3498db" />,
+      icon: <SiDotnet size={45} color="#512bd4" />,
     },
     {
       titulo: "C / C++",
@@ -85,8 +104,7 @@ export default function Habilidades() {
       <div style={styles.sobreMim(tema)}>
         <h2>Minhas Habilidades</h2>
         <p>
-          Aqui está um resumo das principais tecnologias e ferramentas com as quais trabalho no meu
-          dia a dia como desenvolvedor.
+          Aqui está um resumo das principais tecnologias e ferramentas com as quais trabalho.
         </p>
 
         <div style={styles.btns}>
@@ -121,74 +139,101 @@ export default function Habilidades() {
 const styles = {
   container: (tema) => ({
     padding: "40px 20px",
-    background: tema === "escuro" ? "#0d0d0d" : "#f7f7f7",
+    background: tema === "escuro"
+      ? "linear-gradient(180deg, #0a0a0a, #111, #0a0a0a)"
+      : "linear-gradient(180deg, #f4f4f4, #fff, #f4f4f4)",
     color: tema === "escuro" ? "white" : "#222",
     minHeight: "100vh",
-    transition: "0.3s ease",
+    transition: "0.4s ease",
   }),
 
   sobreMim: (tema) => ({
-    padding: "20px",
-    borderRadius: "12px",
-    background: tema === "escuro" ? "#1a1a1a" : "white",
-    boxShadow: "0 0 20px rgba(0,0,0,0.15)",
-    transition: "0.3s",
+    padding: "25px",
+    borderRadius: "14px",
+    background: tema === "escuro"
+      ? "rgba(20, 20, 20, 0.7)"
+      : "rgba(255, 255, 255, 0.7)",
+    backdropFilter: "blur(8px)",
+    boxShadow: tema === "escuro"
+      ? "0 0 25px rgba(255,255,255,0.06)"
+      : "0 0 25px rgba(0,0,0,0.1)",
+    transition: "0.4s",
   }),
 
   btns: {
-    marginTop: "20px",
+    marginTop: "22px",
     display: "flex",
     gap: "12px",
   },
 
   btn: (tema) => ({
-    padding: "12px 20px",
+    padding: "12px 22px",
     borderRadius: "10px",
     border: "none",
     cursor: "pointer",
     fontWeight: "600",
     transition: "0.3s",
-    background: tema === "escuro" ? "#333" : "#ddd",
+    background: tema === "escuro" ? "#292929" : "#ddd",
     color: tema === "escuro" ? "white" : "#333",
+    boxShadow: "0 3px 10px rgba(0,0,0,0.15)",
   }),
 
   lista: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-    gap: "20px",
-    marginTop: "40px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: "25px",
+    marginTop: "45px",
   },
 
   card: (tema) => ({
-    padding: "20px",
-    borderRadius: "15px",
-    background: tema === "escuro" ? "#141414" : "white",
-    boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-    transition: "0.3s ease",
+    padding: "25px",
+    borderRadius: "16px",
+    background: tema === "escuro"
+      ? "rgba(18, 18, 18, 0.6)"
+      : "rgba(255,255,255,0.8)",
+    backdropFilter: "blur(5px)",
+    border: "1px solid rgba(255,255,255,0.07)",
+    boxShadow:
+      tema === "escuro"
+        ? "0 8px 20px rgba(255,255,255,0.06)"
+        : "0 8px 20px rgba(0,0,0,0.12)",
+    transition: "0.35s cubic-bezier(0.4, 0, 0.2, 1)",
     textAlign: "center",
-    transform: "translateY(0)",
+    transform: "scale(1)",
+    opacity: 0,
+    animation: "fadeIn 0.6s forwards",
   }),
 
   cardHover: (tema) => ({
-    transform: "translateY(-8px) scale(1.03)",
+    transform: "scale(1.05) translateY(-8px)",
     boxShadow:
       tema === "escuro"
-        ? "0 0 25px rgba(255,255,255,0.15)"
+        ? "0 0 35px rgba(0, 255, 200, 0.25)"
         : "0 0 25px rgba(0,0,0,0.25)",
+    borderColor:
+      tema === "escuro"
+        ? "rgba(0,255,190,0.4)"
+        : "rgba(0,0,0,0.15)",
   }),
 
   iconBox: {
-    marginBottom: "10px",
+    marginBottom: "12px",
+    transition: "0.3s",
   },
 
   titulo: {
-    marginBottom: "10px",
-    fontSize: "20px",
+    marginBottom: "8px",
+    fontSize: "21px",
     fontWeight: "700",
   },
 
   text: {
     fontSize: "15px",
     lineHeight: "1.4",
+  },
+
+  "@keyframes fadeIn": {
+    from: { opacity: 0, transform: "translateY(10px)" },
+    to: { opacity: 1, transform: "translateY(0)" },
   },
 };
