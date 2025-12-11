@@ -6,6 +6,7 @@ import Footer from "../components/Footer.jsx";
 import TemaContext from "../components/TemaContext";
 import Sobre from "../components/Sobre";
 import Habilidades from "../components/Habilidades";
+import Contato from "../components/Contato";
 
 export default function App() {
   const [tema, setTema] = useState("escuro");
