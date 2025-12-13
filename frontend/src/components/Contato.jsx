@@ -1,177 +1,213 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import TemaContext from "./TemaContext";
 import { FaEnvelope, FaWhatsapp, FaUser } from "react-icons/fa";
 
 export default function Contato() {
   const { tema } = useContext(TemaContext);
+  const [hovered, setHovered] = useState(null);
 
   return (
-    <div style={styles.container(tema)}>
-      <div style={styles.card(tema)}>
-        <h2 style={styles.titulo}>Entre em Contato</h2>
-        <p style={styles.subtitulo}>
-          Estou disponível para projetos, parcerias e oportunidades.
-        </p>
+    <>
+      <style>
+        {`
+          @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}
+      </style>
 
-        <div style={styles.form}>
-          <div style={styles.inputGroup}>
-            <FaUser style={styles.icon(tema)} />
-            <input
-              type="text"
-              placeholder="Seu nome"
-              style={styles.input(tema)}
+      <section style={styles.container(tema)}>
+        <div style={styles.card(tema)}>
+          <h1 style={styles.titulo}>Contato</h1>
+          <p style={styles.subtitulo}>
+            Vamos conversar sobre projetos, ideias ou oportunidades.
+          </p>
+
+          <form style={styles.form}>
+            <div style={styles.inputGroup}>
+              <FaUser style={styles.icon(tema)} />
+              <input
+                type="text"
+                placeholder="Seu nome"
+                style={styles.input(tema)}
+              />
+            </div>
+
+            <div style={styles.inputGroup}>
+              <FaEnvelope style={styles.icon(tema)} />
+              <input
+                type="email"
+                placeholder="Seu email"
+                style={styles.input(tema)}
+              />
+            </div>
+
+            <textarea
+              placeholder="Digite sua mensagem..."
+              style={styles.textarea(tema)}
             />
-          </div>
 
-          <div style={styles.inputGroup}>
-            <FaEnvelope style={styles.icon(tema)} />
-            <input
-              type="email"
-              placeholder="Seu email"
-              style={styles.input(tema)}
-            />
-          </div>
+            <button style={styles.btn(tema)}>Enviar mensagem</button>
+          </form>
 
-          <textarea
-            placeholder="Digite sua mensagem..."
-            style={styles.textarea(tema)}
-          ></textarea>
-
-          <button style={styles.btn(tema)}>Enviar</button>
-
-          <div style={styles.contatosDiretos}>
-            <a
-              href="mailto:seuemail@gmail.com"
-              style={styles.link(tema)}
-            >
-              <FaEnvelope /> Email
-            </a>
-
-            <a
-              href="https://wa.me/55XXXXXXXXX"
-              style={styles.link(tema)}
-            >
-              <FaWhatsapp /> WhatsApp
-            </a>
+          <div style={styles.links}>
+            {[
+              {
+                nome: "Email",
+                icon: <FaEnvelope />,
+                link: "mailto:seuemail@gmail.com",
+              },
+              {
+                nome: "WhatsApp",
+                icon: <FaWhatsapp />,
+                link: "https://wa.me/55XXXXXXXXX",
+              },
+            ].map((item) => (
+              <a
+                key={item.nome}
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  ...styles.link(tema),
+                  ...(hovered === item.nome ? styles.linkHover : {}),
+                }}
+                onMouseEnter={() => setHovered(item.nome)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                {item.icon}
+                {item.nome}
+              </a>
+            ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
 
 const styles = {
   container: (tema) => ({
-    padding: "40px 20px",
     minHeight: "100vh",
+    padding: "70px 20px",
     background:
       tema === "escuro"
-        ? "linear-gradient(180deg, #0a0a0a, #111)"
-        : "linear-gradient(180deg, #f4f4f4, #fff)",
+        ? "linear-gradient(180deg, #0b0b0b, #111, #0b0b0b)"
+        : "linear-gradient(180deg, #f5f5f5, #fff)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    animation: "fadeIn 0.6s ease",
+    transition: "0.4s",
   }),
 
   card: (tema) => ({
     width: "100%",
-    maxWidth: "500px",
-    padding: "30px",
-    borderRadius: "15px",
-    background: tema === "escuro"
-      ? "rgba(20, 20, 20, 0.7)"
-      : "rgba(255, 255, 255, 0.7)",
-    backdropFilter: "blur(8px)",
+    maxWidth: "520px",
+    padding: "36px",
+    borderRadius: "20px",
+    background:
+      tema === "escuro"
+        ? "rgba(20,20,20,0.75)"
+        : "rgba(255,255,255,0.85)",
+    backdropFilter: "blur(10px)",
     boxShadow:
       tema === "escuro"
-        ? "0 0 25px rgba(255,255,255,0.06)"
-        : "0 0 25px rgba(0,0,0,0.1)",
-    transition: "0.3s",
+        ? "0 10px 30px rgba(0,0,0,0.7)"
+        : "0 10px 30px rgba(0,0,0,0.15)",
+    animation: "fadeUp 0.6s ease forwards",
   }),
 
   titulo: {
-    fontSize: "25px",
     textAlign: "center",
-    marginBottom: "10px",
+    fontSize: "34px",
+    marginBottom: "8px",
   },
 
   subtitulo: {
     textAlign: "center",
-    marginBottom: "25px",
+    marginBottom: "30px",
     opacity: 0.8,
+    fontSize: "15px",
   },
 
   form: {
     display: "flex",
     flexDirection: "column",
-    gap: "15px",
+    gap: "16px",
   },
 
   inputGroup: {
     display: "flex",
     alignItems: "center",
     gap: "10px",
-    width: "100%",
   },
 
   icon: (tema) => ({
-    fontSize: "20px",
-    color: tema === "escuro" ? "#bbb" : "#666",
+    fontSize: "18px",
+    color: tema === "escuro" ? "#aaa" : "#666",
   }),
 
   input: (tema) => ({
     flex: 1,
-    padding: "12px",
-    borderRadius: "10px",
+    padding: "14px",
+    borderRadius: "12px",
     border: "none",
     fontSize: "15px",
-    background: tema === "escuro" ? "#1a1a1a" : "#eee",
-    color: tema === "escuro" ? "white" : "#333",
+    background: tema === "escuro" ? "#161616" : "#eee",
+    color: tema === "escuro" ? "#fff" : "#222",
     outline: "none",
   }),
 
   textarea: (tema) => ({
-    width: "100%",
-    padding: "12px",
-    minHeight: "120px",
-    borderRadius: "10px",
+    minHeight: "130px",
+    padding: "14px",
+    borderRadius: "12px",
     border: "none",
-    background: tema === "escuro" ? "#1a1a1a" : "#eee",
-    color: tema === "escuro" ? "white" : "#333",
-    fontSize: "15px",
     resize: "none",
+    fontSize: "15px",
+    background: tema === "escuro" ? "#161616" : "#eee",
+    color: tema === "escuro" ? "#fff" : "#222",
     outline: "none",
   }),
 
   btn: (tema) => ({
-    padding: "12px",
-    borderRadius: "10px",
+    marginTop: "10px",
+    padding: "14px",
+    borderRadius: "12px",
     border: "none",
-    fontWeight: "700",
     cursor: "pointer",
+    fontWeight: "700",
     fontSize: "16px",
-    background: tema === "escuro" ? "#00ffc3" : "#333",
+    background: tema === "escuro" ? "#00ffc3" : "#222",
     color: tema === "escuro" ? "#000" : "#fff",
     transition: "0.3s",
   }),
 
-  contatosDiretos: {
-    marginTop: "20px",
+  links: {
+    marginTop: "28px",
     display: "flex",
     justifyContent: "space-between",
-    fontSize: "16px",
+    gap: "15px",
   },
 
   link: (tema) => ({
+    flex: 1,
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     gap: "8px",
+    padding: "12px",
+    borderRadius: "12px",
     textDecoration: "none",
-    padding: "10px 12px",
-    borderRadius: "10px",
+    fontWeight: "600",
     background: tema === "escuro" ? "#222" : "#ddd",
-    color: tema === "escuro" ? "#fff" : "#333",
+    color: tema === "escuro" ? "#fff" : "#222",
     transition: "0.3s",
   }),
+
+  linkHover: {
+    transform: "translateY(-4px)",
+    boxShadow: "0 0 20px rgba(0,255,200,0.35)",
+  },
 };
