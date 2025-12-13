@@ -4,6 +4,7 @@ import TemaContext from "./TemaContext";
 import {
   FaHtml5,
   FaCss3Alt,
+  FaJs,
   FaReact,
   FaPython,
   FaCode,
@@ -24,7 +25,7 @@ export default function Habilidades() {
   const { tema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
 
-  const habilidades = [
+  const HabilidadesLista = [
     {
       titulo: "HTML",
       text: "Estruturação semântica e acessível para a web.",
@@ -32,8 +33,8 @@ export default function Habilidades() {
     },
     {
       titulo: "CSS",
-      text: "Layouts modernos, responsivos e animações.",
-      icon: <FaCss3Alt size={42} color="#2965f1" />,
+      text: "Design moderno, responsivo e animado.",
+      icon: <FaCss3Alt size={42} color="#264de4" />,
     },
     {
       titulo: "JavaScript / TypeScript",
@@ -41,39 +42,39 @@ export default function Habilidades() {
       icon: <SiTypescript size={42} color="#3178c6" />,
     },
     {
-      titulo: "React / Node.js",
-      text: "Front-end moderno e back-end em JavaScript.",
-      icon: <FaReact size={42} color="#61dafb" />,
+      titulo: "React / Node / AJAX",
+      text: "SPAs, APIs e aplicações completas.",
+      icon: <FaReact size={42} color="#61dbfb" />,
     },
     {
       titulo: "Flutter",
-      text: "Apps multiplataforma fluidos e rápidos.",
-      icon: <SiFlutter size={42} color="#5cc8f8" />,
+      text: "Apps modernos para Android e iOS.",
+      icon: <SiFlutter size={42} color="#5fc8f8" />,
     },
     {
       titulo: "Python",
-      text: "APIs, automações e análise de dados.",
+      text: "APIs, automação e análise de dados.",
       icon: <FaPython size={42} color="#ffd343" />,
     },
     {
       titulo: "API REST",
-      text: "Comunicação eficiente entre sistemas.",
-      icon: <FaCode size={42} color="#4fc3f7" />,
+      text: "Comunicação segura entre sistemas.",
+      icon: <FaCode size={42} color="#00ffc8" />,
     },
     {
       titulo: ".NET MAUI / Xamarin",
-      text: "Aplicações mobile com C#.",
+      text: "Apps multiplataforma com C#.",
       icon: <SiDotnet size={42} color="#512bd4" />,
     },
     {
       titulo: "C / C++",
-      text: "Desenvolvimento de sistemas eficientes.",
+      text: "Desempenho, lógica e baixo nível.",
       icon: <SiCplusplus size={42} color="#00599c" />,
     },
     {
       titulo: "Java",
-      text: "POO, APIs e aplicações robustas.",
-      icon: <FaJava size={42} color="#e76f00" />,
+      text: "POO e aplicações robustas.",
+      icon: <FaJava size={42} color="#e06c00" />,
     },
     {
       titulo: "XML",
@@ -82,8 +83,8 @@ export default function Habilidades() {
     },
     {
       titulo: "IA & Automação",
-      text: "Uso de IA para produtividade e soluções inteligentes.",
-      icon: <MdOutlineSmartToy size={42} color="#9b59b6" />,
+      text: "Soluções inteligentes com IA.",
+      icon: <MdOutlineSmartToy size={42} color="#00ffc8" />,
     },
   ];
 
@@ -92,31 +93,38 @@ export default function Habilidades() {
       <style>
         {`
           @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+              opacity: 0;
+              transform: translateY(15px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         `}
       </style>
 
-      <section style={styles.container(tema)}>
-        <header style={styles.header}>
+      <section style={styles.container}>
+        <div style={styles.header}>
           <h1 style={styles.title}>Habilidades</h1>
           <p style={styles.subtitle}>
             Tecnologias que utilizo para criar soluções modernas e eficientes.
           </p>
-        </header>
+        </div>
 
         <div style={styles.grid}>
-          {habilidades.map((item, index) => (
+          {HabilidadesLista.map((item) => (
             <div
               key={item.titulo}
               style={{
-                ...styles.card(tema),
+                ...styles.card,
                 ...(hovered === item.titulo ? styles.cardHover : {}),
-                animationDelay: `${index * 0.05}s`,
               }}
               onMouseEnter={() => setHovered(item.titulo)}
               onMouseLeave={() => setHovered(null)}
+              onTouchStart={() => setHovered(item.titulo)}
+              onTouchEnd={() => setHovered(null)}
             >
               <div style={styles.icon}>{item.icon}</div>
               <h3 style={styles.cardTitle}>{item.titulo}</h3>
@@ -130,65 +138,57 @@ export default function Habilidades() {
 }
 
 const styles = {
-  container: (tema) => ({
+  container: {
     minHeight: "100vh",
-    padding: "70px 20px",
+    padding: "60px 20px",
     background:
-      tema === "escuro"
-        ? "linear-gradient(180deg, #0b0b0b, #111, #0b0b0b)"
-        : "linear-gradient(180deg, #f5f5f5, #fff)",
-    color: tema === "escuro" ? "#f1f1f1" : "#222",
-    transition: "0.4s",
-  }),
+      "linear-gradient(180deg, #0b0f14, #111, #0b0f14)",
+    color: "#eaeaea",
+  },
 
   header: {
-    maxWidth: "800px",
-    margin: "0 auto 50px",
+    maxWidth: "900px",
+    margin: "0 auto",
     textAlign: "center",
+    marginBottom: "50px",
   },
 
   title: {
     fontSize: "38px",
+    fontWeight: "800",
+    color: "#00ffc8",
     marginBottom: "10px",
-    letterSpacing: "1px",
   },
 
   subtitle: {
     fontSize: "16px",
-    opacity: 0.8,
+    color: "#b5b5b5",
   },
 
   grid: {
-    maxWidth: "1200px",
-    margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "26px",
+    gap: "28px",
+    maxWidth: "1200px",
+    margin: "0 auto",
   },
 
-  card: (tema) => ({
-    padding: "26px",
+  card: {
+    padding: "28px",
     borderRadius: "18px",
-    background:
-      tema === "escuro"
-        ? "rgba(20,20,20,0.7)"
-        : "rgba(255,255,255,0.85)",
-    backdropFilter: "blur(8px)",
+    background: "rgba(20,20,20,0.7)",
+    backdropFilter: "blur(10px)",
     border: "1px solid rgba(255,255,255,0.06)",
+    boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
     textAlign: "center",
-    boxShadow:
-      tema === "escuro"
-        ? "0 8px 25px rgba(0,0,0,0.6)"
-        : "0 8px 25px rgba(0,0,0,0.15)",
-    transition: "0.35s ease",
-    animation: "fadeUp 0.6s forwards",
-    opacity: 0,
-  }),
+    transition: "0.4s cubic-bezier(.4,0,.2,1)",
+    animation: "fadeUp 0.6s ease forwards",
+  },
 
   cardHover: {
     transform: "translateY(-10px) scale(1.04)",
-    boxShadow: "0 0 30px rgba(0, 255, 200, 0.25)",
-    borderColor: "rgba(0,255,200,0.35)",
+    borderColor: "rgba(0,255,200,0.5)",
+    boxShadow: "0 0 35px rgba(0,255,200,0.35)",
   },
 
   icon: {
@@ -197,12 +197,14 @@ const styles = {
 
   cardTitle: {
     fontSize: "20px",
-    marginBottom: "6px",
+    fontWeight: "700",
+    marginBottom: "8px",
+    color: "#ffffff",
   },
 
   cardText: {
-    fontSize: "15px",
-    opacity: 0.85,
-    lineHeight: 1.4,
+    fontSize: "14.5px",
+    lineHeight: "1.5",
+    color: "#cfcfcf",
   },
 };
