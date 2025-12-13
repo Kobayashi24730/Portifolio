@@ -11,14 +11,20 @@ export default function Contato() {
       <style>
         {`
           @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+              opacity: 0;
+              transform: translateY(25px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
         `}
       </style>
 
-      <section style={styles.container(tema)}>
-        <div style={styles.card(tema)}>
+      <section style={styles.container}>
+        <div style={styles.card}>
           <h1 style={styles.titulo}>Contato</h1>
           <p style={styles.subtitulo}>
             Vamos conversar sobre projetos, ideias ou oportunidades.
@@ -26,29 +32,29 @@ export default function Contato() {
 
           <form style={styles.form}>
             <div style={styles.inputGroup}>
-              <FaUser style={styles.icon(tema)} />
+              <FaUser style={styles.icon} />
               <input
                 type="text"
                 placeholder="Seu nome"
-                style={styles.input(tema)}
+                style={styles.input}
               />
             </div>
 
             <div style={styles.inputGroup}>
-              <FaEnvelope style={styles.icon(tema)} />
+              <FaEnvelope style={styles.icon} />
               <input
                 type="email"
                 placeholder="Seu email"
-                style={styles.input(tema)}
+                style={styles.input}
               />
             </div>
 
             <textarea
               placeholder="Digite sua mensagem..."
-              style={styles.textarea(tema)}
+              style={styles.textarea}
             />
 
-            <button style={styles.btn(tema)}>Enviar mensagem</button>
+            <button style={styles.btn}>Enviar mensagem</button>
           </form>
 
           <div style={styles.links}>
@@ -70,7 +76,7 @@ export default function Contato() {
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  ...styles.link(tema),
+                  ...styles.link,
                   ...(hovered === item.nome ? styles.linkHover : {}),
                 }}
                 onMouseEnter={() => setHovered(item.nome)}
@@ -88,47 +94,41 @@ export default function Contato() {
 }
 
 const styles = {
-  container: (tema) => ({
+  container: {
     minHeight: "100vh",
     padding: "70px 20px",
     background:
-      tema === "escuro"
-        ? "linear-gradient(180deg, #0b0b0b, #111, #0b0b0b)"
-        : "linear-gradient(180deg, #f5f5f5, #fff)",
+      "linear-gradient(180deg, #0b0f14, #111, #0b0f14)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    transition: "0.4s",
-  }),
+  },
 
-  card: (tema) => ({
+  card: {
     width: "100%",
     maxWidth: "520px",
-    padding: "36px",
-    borderRadius: "20px",
-    background:
-      tema === "escuro"
-        ? "rgba(20,20,20,0.75)"
-        : "rgba(255,255,255,0.85)",
-    backdropFilter: "blur(10px)",
-    boxShadow:
-      tema === "escuro"
-        ? "0 10px 30px rgba(0,0,0,0.7)"
-        : "0 10px 30px rgba(0,0,0,0.15)",
+    padding: "40px",
+    borderRadius: "22px",
+    background: "rgba(20,20,20,0.75)",
+    backdropFilter: "blur(12px)",
+    border: "1px solid rgba(255,255,255,0.06)",
+    boxShadow: "0 15px 40px rgba(0,0,0,0.6)",
     animation: "fadeUp 0.6s ease forwards",
-  }),
+  },
 
   titulo: {
     textAlign: "center",
-    fontSize: "34px",
-    marginBottom: "8px",
+    fontSize: "36px",
+    fontWeight: "800",
+    marginBottom: "10px",
+    color: "#00ffc8",
   },
 
   subtitulo: {
     textAlign: "center",
-    marginBottom: "30px",
-    opacity: 0.8,
+    marginBottom: "32px",
     fontSize: "15px",
+    color: "#b5b5b5",
   },
 
   form: {
@@ -140,74 +140,75 @@ const styles = {
   inputGroup: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
+    gap: "12px",
   },
 
-  icon: (tema) => ({
+  icon: {
     fontSize: "18px",
-    color: tema === "escuro" ? "#aaa" : "#666",
-  }),
+    color: "#00ffc8",
+  },
 
-  input: (tema) => ({
+  input: {
     flex: 1,
-    padding: "14px",
-    borderRadius: "12px",
-    border: "none",
+    padding: "14px 16px",
+    borderRadius: "14px",
+    border: "1px solid rgba(255,255,255,0.08)",
     fontSize: "15px",
-    background: tema === "escuro" ? "#161616" : "#eee",
-    color: tema === "escuro" ? "#fff" : "#222",
+    background: "#141414",
+    color: "#fff",
     outline: "none",
-  }),
+  },
 
-  textarea: (tema) => ({
+  textarea: {
     minHeight: "130px",
-    padding: "14px",
-    borderRadius: "12px",
-    border: "none",
+    padding: "14px 16px",
+    borderRadius: "14px",
+    border: "1px solid rgba(255,255,255,0.08)",
     resize: "none",
     fontSize: "15px",
-    background: tema === "escuro" ? "#161616" : "#eee",
-    color: tema === "escuro" ? "#fff" : "#222",
+    background: "#141414",
+    color: "#fff",
     outline: "none",
-  }),
-
-  btn: (tema) => ({
-    marginTop: "10px",
-    padding: "14px",
-    borderRadius: "12px",
-    border: "none",
-    cursor: "pointer",
-    fontWeight: "700",
-    fontSize: "16px",
-    background: tema === "escuro" ? "#00ffc3" : "#222",
-    color: tema === "escuro" ? "#000" : "#fff",
-    transition: "0.3s",
-  }),
-
-  links: {
-    marginTop: "28px",
-    display: "flex",
-    justifyContent: "space-between",
-    gap: "15px",
   },
 
-  link: (tema) => ({
+  btn: {
+    marginTop: "10px",
+    padding: "14px",
+    borderRadius: "14px",
+    border: "none",
+    cursor: "pointer",
+    fontWeight: "800",
+    fontSize: "16px",
+    background: "#00ffc8",
+    color: "#000",
+    transition: "0.3s",
+  },
+
+  links: {
+    marginTop: "30px",
+    display: "flex",
+    gap: "16px",
+  },
+
+  link: {
     flex: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: "8px",
-    padding: "12px",
-    borderRadius: "12px",
+    gap: "10px",
+    padding: "14px",
+    borderRadius: "14px",
     textDecoration: "none",
-    fontWeight: "600",
-    background: tema === "escuro" ? "#222" : "#ddd",
-    color: tema === "escuro" ? "#fff" : "#222",
-    transition: "0.3s",
-  }),
+    fontWeight: "700",
+    background: "rgba(25,25,25,0.8)",
+    color: "#fff",
+    border: "1px solid rgba(255,255,255,0.06)",
+    transition: "0.35s",
+  },
 
   linkHover: {
-    transform: "translateY(-4px)",
-    boxShadow: "0 0 20px rgba(0,255,200,0.35)",
+    transform: "translateY(-6px)",
+    boxShadow: "0 0 25px rgba(0,255,200,0.45)",
+    borderColor: "rgba(0,255,200,0.6)",
   },
 };
