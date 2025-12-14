@@ -1,6 +1,5 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/imgs/LogoEX.png";
 import TemaContext from "./TemaContext";
 
 export default function Navbar() {
@@ -24,7 +23,6 @@ export default function Navbar() {
   return (
     <nav style={styles.nav(tema)}>
       <div style={styles.divTitle}>
-        <img src={Logo} style={styles.img} alt="logo" />
         <h2 style={styles.title}>Kobayashi</h2>
       </div>
 
@@ -74,7 +72,6 @@ const styles = {
     alignItems: "center",
     padding: "14px 40px",
 
-    /* 🔥 Fundo combinando com o Home */
     background:
       tema === "escuro"
         ? "linear-gradient(180deg, rgba(10,15,30,0.9), rgba(5,8,20,0.85))"
@@ -109,7 +106,7 @@ const styles = {
     margin: 0,
     fontWeight: 600,
     letterSpacing: "1px",
-    color: "#e6f1ff",
+    color: "#333",
   },
 
   ul: {
