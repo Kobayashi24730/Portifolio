@@ -4,7 +4,6 @@ import TemaContext from "./TemaContext";
 import {
   FaHtml5,
   FaCss3Alt,
-  FaJs,
   FaReact,
   FaPython,
   FaCode,
@@ -59,7 +58,7 @@ export default function Habilidades() {
     {
       titulo: "API REST",
       text: "Comunicação segura entre sistemas.",
-      icon: <FaCode size={42} color="#00ffc8" />,
+      icon: <FaCode size={42} color="#aab4ff" />,
     },
     {
       titulo: ".NET MAUI / Xamarin",
@@ -83,8 +82,8 @@ export default function Habilidades() {
     },
     {
       titulo: "IA & Automação",
-      text: "Soluções inteligentes com IA.",
-      icon: <MdOutlineSmartToy size={42} color="#00ffc8" />,
+      text: "Soluções inteligentes aplicadas a sistemas reais.",
+      icon: <MdOutlineSmartToy size={42} color="#aab4ff" />,
     },
   ];
 
@@ -95,17 +94,19 @@ export default function Habilidades() {
           @keyframes fadeUp {
             from {
               opacity: 0;
-              transform: translateY(15px);
+              transform: translateY(18px) scale(0.96);
+              filter: blur(4px);
             }
             to {
               opacity: 1;
-              transform: translateY(0);
+              transform: translateY(0) scale(1);
+              filter: blur(0);
             }
           }
         `}
       </style>
 
-      <section style={styles.container}>
+      <section style={styles.container(tema)}>
         <div style={styles.header}>
           <h1 style={styles.title}>Habilidades</h1>
           <p style={styles.subtitle}>
@@ -118,8 +119,8 @@ export default function Habilidades() {
             <div
               key={item.titulo}
               style={{
-                ...styles.card,
-                ...(hovered === item.titulo ? styles.cardHover : {}),
+                ...styles.card(tema),
+                ...(hovered === item.titulo ? styles.cardHover(tema) : {}),
               }}
               onMouseEnter={() => setHovered(item.titulo)}
               onMouseLeave={() => setHovered(null)}
@@ -138,58 +139,62 @@ export default function Habilidades() {
 }
 
 const styles = {
-  container: {
+  container: (tema) => ({
     minHeight: "100vh",
-    padding: "60px 20px",
+    padding: "70px 20px",
     background:
-      "linear-gradient(180deg, #0b0f14, #111, #0b0f14)",
-    color: "#eaeaea",
-  },
+      tema === "escuro"
+        ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
+        : "linear-gradient(135deg, #e7e7e7, #ffffff)",
+    color: tema === "escuro" ? "#fff" : "#000",
+    transition: "0.3s ease",
+  }),
 
   header: {
     maxWidth: "900px",
-    margin: "0 auto",
+    margin: "0 auto 55px",
     textAlign: "center",
-    marginBottom: "50px",
   },
 
   title: {
-    fontSize: "38px",
+    fontSize: "2.6rem",
     fontWeight: "800",
-    color: "#00ffc8",
+    color: "#c7d8ff",
+    textShadow: "0 0 12px rgba(120,150,255,0.45)",
     marginBottom: "10px",
   },
 
   subtitle: {
     fontSize: "16px",
-    color: "#b5b5b5",
+    color: "#aab4ff",
   },
 
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "28px",
+    gap: "30px",
     maxWidth: "1200px",
     margin: "0 auto",
   },
 
-  card: {
+  card: (tema) => ({
     padding: "28px",
     borderRadius: "18px",
-    background: "rgba(20,20,20,0.7)",
-    backdropFilter: "blur(10px)",
-    border: "1px solid rgba(255,255,255,0.06)",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+    background: "rgba(255,255,255,0.06)",
+    backdropFilter: "blur(12px)",
+    border: "1px solid rgba(120,150,255,0.25)",
+    boxShadow: "0 0 20px rgba(120,150,255,0.18)",
     textAlign: "center",
-    transition: "0.4s cubic-bezier(.4,0,.2,1)",
+    transition: "0.35s cubic-bezier(.4,0,.2,1)",
     animation: "fadeUp 0.6s ease forwards",
-  },
+  }),
 
-  cardHover: {
-    transform: "translateY(-10px) scale(1.04)",
-    borderColor: "rgba(0,255,200,0.5)",
-    boxShadow: "0 0 35px rgba(0,255,200,0.35)",
-  },
+  cardHover: (tema) => ({
+    transform: "translateY(-10px) scale(1.05)",
+    boxShadow: "0 0 35px rgba(90,120,255,0.45)",
+    borderColor: "rgba(150,180,255,0.45)",
+    background: "rgba(255,255,255,0.12)",
+  }),
 
   icon: {
     marginBottom: "14px",
@@ -199,12 +204,11 @@ const styles = {
     fontSize: "20px",
     fontWeight: "700",
     marginBottom: "8px",
-    color: "#ffffff",
   },
 
   cardText: {
     fontSize: "14.5px",
     lineHeight: "1.5",
-    color: "#cfcfcf",
+    color: "#d5ddff",
   },
 };
