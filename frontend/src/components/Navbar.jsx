@@ -102,12 +102,12 @@ const styles = {
     filter: "drop-shadow(0 0 6px rgba(0,180,255,0.4))",
   },
 
-  title: (tema) => ({
+  title: {
     margin: 0,
     fontWeight: 600,
     letterSpacing: "1px",
-    color: tema === "escuro" ? "#b8c7e0" : "#333",
-  }),
+    color: "#b8c7e0",
+  },
 
   ul: {
     listStyle: "none",
