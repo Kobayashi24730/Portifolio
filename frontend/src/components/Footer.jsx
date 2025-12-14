@@ -37,7 +37,6 @@ export default function Footer() {
 const styles = {
   footer: (tema) => ({
     padding: "30px 20px",
-    marginTop: "80px",
     textAlign: "center",
 
     background:
