@@ -13,18 +13,20 @@ export default function Contato() {
           @keyframes fadeUp {
             from {
               opacity: 0;
-              transform: translateY(25px);
+              transform: translateY(20px) scale(0.96);
+              filter: blur(4px);
             }
             to {
               opacity: 1;
-              transform: translateY(0);
+              transform: translateY(0) scale(1);
+              filter: blur(0);
             }
           }
         `}
       </style>
 
-      <section style={styles.container}>
-        <div style={styles.card}>
+      <section style={styles.container(tema)}>
+        <div style={styles.card(tema)}>
           <h1 style={styles.titulo}>Contato</h1>
           <p style={styles.subtitulo}>
             Vamos conversar sobre projetos, ideias ou oportunidades.
@@ -54,7 +56,9 @@ export default function Contato() {
               style={styles.textarea}
             />
 
-            <button style={styles.btn}>Enviar mensagem</button>
+            <button style={styles.btn}>
+              Enviar mensagem
+            </button>
           </form>
 
           <div style={styles.links}>
@@ -94,41 +98,44 @@ export default function Contato() {
 }
 
 const styles = {
-  container: {
+  container: (tema) => ({
     minHeight: "100vh",
     padding: "70px 20px",
-    background:
-      "linear-gradient(180deg, #0b0f14, #111, #0b0f14)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-  },
+    background:
+      tema === "escuro"
+        ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
+        : "linear-gradient(135deg, #e7e7e7, #ffffff)",
+    transition: "0.3s ease",
+  }),
 
-  card: {
+  card: (tema) => ({
     width: "100%",
     maxWidth: "520px",
     padding: "40px",
-    borderRadius: "22px",
-    background: "rgba(20,20,20,0.75)",
+    borderRadius: "18px",
+    background: "rgba(255,255,255,0.06)",
     backdropFilter: "blur(12px)",
-    border: "1px solid rgba(255,255,255,0.06)",
-    boxShadow: "0 15px 40px rgba(0,0,0,0.6)",
-    animation: "fadeUp 0.6s ease forwards",
-  },
+    border: "1px solid rgba(120,150,255,0.25)",
+    boxShadow: "0 0 25px rgba(120,150,255,0.25)",
+    animation: "fadeUp 0.7s ease forwards",
+    color: tema === "escuro" ? "#fff" : "#000",
+  }),
 
   titulo: {
     textAlign: "center",
-    fontSize: "36px",
-    fontWeight: "800",
+    fontSize: "2.3rem",
     marginBottom: "10px",
-    color: "#00ffc8",
+    textShadow: "0 0 10px rgba(120,150,255,0.35)",
   },
 
   subtitulo: {
     textAlign: "center",
     marginBottom: "32px",
     fontSize: "15px",
-    color: "#b5b5b5",
+    color: "#c7d8ff",
   },
 
   form: {
@@ -145,43 +152,44 @@ const styles = {
 
   icon: {
     fontSize: "18px",
-    color: "#00ffc8",
+    color: "#aab4ff",
   },
 
   input: {
     flex: 1,
     padding: "14px 16px",
-    borderRadius: "14px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    fontSize: "15px",
-    background: "#141414",
+    borderRadius: "12px",
+    border: "1px solid rgba(110,140,255,0.25)",
+    background: "rgba(10,15,33,0.8)",
     color: "#fff",
     outline: "none",
+    fontSize: "15px",
   },
 
   textarea: {
     minHeight: "130px",
     padding: "14px 16px",
-    borderRadius: "14px",
-    border: "1px solid rgba(255,255,255,0.08)",
-    resize: "none",
-    fontSize: "15px",
-    background: "#141414",
+    borderRadius: "12px",
+    border: "1px solid rgba(110,140,255,0.25)",
+    background: "rgba(10,15,33,0.8)",
     color: "#fff",
     outline: "none",
+    resize: "none",
+    fontSize: "15px",
   },
 
   btn: {
-    marginTop: "10px",
+    marginTop: "12px",
     padding: "14px",
-    borderRadius: "14px",
+    borderRadius: "12px",
     border: "none",
     cursor: "pointer",
-    fontWeight: "800",
-    fontSize: "16px",
-    background: "#00ffc8",
-    color: "#000",
-    transition: "0.3s",
+    fontWeight: "600",
+    fontSize: "1.05rem",
+    background: "linear-gradient(135deg, #2563eb, #4589ff)",
+    color: "#fff",
+    transition: "0.25s ease",
+    boxShadow: "0 0 14px rgba(37, 99, 235, 0.6)",
   },
 
   links: {
@@ -197,18 +205,19 @@ const styles = {
     justifyContent: "center",
     gap: "10px",
     padding: "14px",
-    borderRadius: "14px",
+    borderRadius: "12px",
     textDecoration: "none",
-    fontWeight: "700",
-    background: "rgba(25,25,25,0.8)",
-    color: "#fff",
-    border: "1px solid rgba(255,255,255,0.06)",
-    transition: "0.35s",
+    fontWeight: "600",
+    background: "rgba(255,255,255,0.05)",
+    color: "#c7d8ff",
+    border: "1px solid rgba(110,140,255,0.2)",
+    transition: "0.25s ease",
+    boxShadow: "0 0 8px rgba(120,150,255,0.2)",
   },
 
   linkHover: {
-    transform: "translateY(-6px)",
-    boxShadow: "0 0 25px rgba(0,255,200,0.45)",
-    borderColor: "rgba(0,255,200,0.6)",
+    transform: "translateY(-4px)",
+    boxShadow: "0 0 25px rgba(90,120,255,0.35)",
+    background: "rgba(255,255,255,0.15)",
   },
 };
