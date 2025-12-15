@@ -58,17 +58,16 @@ export default function Sobre() {
 
   return (
     <div style={styles.container(tema)}>
-
       <div style={styles.sobreBox}>
-        <h2 style={styles.title}>Sobre Mim</h2>
-        <p style={styles.text}>
+        <h2 style={styles.title(tema)}>Sobre Mim</h2>
+        <p style={styles.text(tema)}>
           Desenvolvedor com experiência prática em estágio técnico, atuando em
           sistemas reais, automações, monitoramento, aplicações web, mobile e
           processamento de dados.
         </p>
       </div>
 
-      <h2 style={styles.sectionTitle}>Experiência de Estágio</h2>
+      <h2 style={styles.sectionTitle(tema)}>Experiência de Estágio</h2>
 
       <div style={styles.lista}>
         {estagio.map((item, i) => (
@@ -79,8 +78,8 @@ export default function Sobre() {
           >
             <img src={item.imagem} alt={item.titulo} style={styles.image} />
 
-            <h3>{item.titulo}</h3>
-            <p>{item.descricao}</p>
+            <h3 style={styles.cardTitle(tema)}>{item.titulo}</h3>
+            <p style={styles.cardText(tema)}>{item.descricao}</p>
 
             <div style={styles.buttons}>
               <a href={item.demo} target="_blank" style={styles.btnPrimary}>
@@ -95,7 +94,7 @@ export default function Sobre() {
       </div>
     </div>
   );
-    }
+}
 
 const styles = {
   container: (tema) => ({
@@ -105,7 +104,7 @@ const styles = {
       tema === "escuro"
         ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
         : "linear-gradient(135deg, #e7e7e7, #ffffff)",
-    color: tema === "escuro" ? "#fff" : "#000",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
     transition: "0.3s ease",
   }),
 
@@ -121,24 +120,24 @@ const styles = {
     textAlign: "center",
   },
 
-  title: {
+  title: (tema) => ({
     fontSize: "2.2rem",
     marginBottom: "12px",
-    textShadow: "0 0 12px rgba(120,150,255,0.4)",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
-  text: {
+  text: (tema) => ({
     fontSize: "1.05rem",
     lineHeight: "1.6",
-    color: "#c7d8ff",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
-  sectionTitle: {
+  sectionTitle: (tema) => ({
     textAlign: "center",
     fontSize: "2rem",
     marginBottom: "35px",
-    textShadow: "0 0 10px rgba(120,150,255,0.35)",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
   lista: {
     display: "grid",
@@ -159,6 +158,17 @@ const styles = {
     transform: "translateY(25px)",
     transition: "0.6s ease",
   },
+
+  cardTitle: (tema) => ({
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+    marginBottom: "6px",
+  }),
+
+  cardText: (tema) => ({
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+    fontSize: "14px",
+    lineHeight: "1.5",
+  }),
 
   image: {
     width: "100%",
@@ -189,7 +199,7 @@ const styles = {
     padding: "10px 18px",
     borderRadius: "10px",
     border: "2px solid #6e8cff",
-    color: "#c7d8ff",
+    color: "#6e8cff",
     textDecoration: "none",
     fontWeight: "600",
   },
