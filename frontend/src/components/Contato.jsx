@@ -66,12 +66,12 @@ export default function Contato() {
               {
                 nome: "Email",
                 icon: <FaEnvelope />,
-                link: "mailto:seuemail@gmail.com",
+                link: "mailto:guisato.acdc@gmail.com",
               },
               {
                 nome: "WhatsApp",
                 icon: <FaWhatsapp />,
-                link: "https://wa.me/55XXXXXXXXX",
+                link: "https://wa.me/55992695835",
               },
             ].map((item) => (
               <a
