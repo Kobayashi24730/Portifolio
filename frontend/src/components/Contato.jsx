@@ -33,7 +33,7 @@ export default function Contato() {
             Vamos conversar sobre projetos, ideias ou oportunidades.
           </p>
 
-          <form style={styles.form} action={"malito:guisato.acdc@gmail.com"} method={"POST"}>
+          <form style={styles.form} action="malito:guisato.acdc@gmail.com" method="POST" encType="text/plain">
             <div style={styles.inputGroup}>
               <FaUser style={styles.icon(tema)} />
               <input
