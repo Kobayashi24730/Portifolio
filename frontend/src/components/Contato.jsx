@@ -27,33 +27,34 @@ export default function Contato() {
 
       <section style={styles.container(tema)}>
         <div style={styles.card(tema)}>
-          <h1 style={styles.titulo}>Contato</h1>
-          <p style={styles.subtitulo}>
+          <h1 style={styles.titulo(tema)}>Contato</h1>
+
+          <p style={styles.subtitulo(tema)}>
             Vamos conversar sobre projetos, ideias ou oportunidades.
           </p>
 
-          <form style={styles.form}>
+          <form style={styles.form} action={"malito:guisato.acdc@gmail.com"} method={"POST"}>
             <div style={styles.inputGroup}>
-              <FaUser style={styles.icon} />
+              <FaUser style={styles.icon(tema)} />
               <input
                 type="text"
                 placeholder="Seu nome"
-                style={styles.input}
+                style={styles.input(tema)}
               />
             </div>
 
             <div style={styles.inputGroup}>
-              <FaEnvelope style={styles.icon} />
+              <FaEnvelope style={styles.icon(tema)} />
               <input
                 type="email"
                 placeholder="Seu email"
-                style={styles.input}
+                style={styles.input(tema)}
               />
             </div>
 
             <textarea
               placeholder="Digite sua mensagem..."
-              style={styles.textarea}
+              style={styles.textarea(tema)}
             />
 
             <button style={styles.btn}>
@@ -80,7 +81,7 @@ export default function Contato() {
                 target="_blank"
                 rel="noreferrer"
                 style={{
-                  ...styles.link,
+                  ...styles.link(tema),
                   ...(hovered === item.nome ? styles.linkHover : {}),
                 }}
                 onMouseEnter={() => setHovered(item.nome)}
@@ -116,7 +117,10 @@ const styles = {
     maxWidth: "520px",
     padding: "40px",
     borderRadius: "18px",
-    background: "rgba(255,255,255,0.06)",
+    background:
+      tema === "escuro"
+        ? "rgba(255,255,255,0.06)"
+        : "rgba(255,255,255,0.85)",
     backdropFilter: "blur(12px)",
     border: "1px solid rgba(120,150,255,0.25)",
     boxShadow: "0 0 25px rgba(120,150,255,0.25)",
@@ -124,19 +128,23 @@ const styles = {
     color: tema === "escuro" ? "#fff" : "#000",
   }),
 
-  titulo: {
+  titulo: (tema) => ({
     textAlign: "center",
     fontSize: "2.3rem",
     marginBottom: "10px",
-    textShadow: "0 0 10px rgba(120,150,255,0.35)",
-  },
+    color: tema === "escuro" ? "#ffffff" : "#000000",
+    textShadow:
+      tema === "escuro"
+        ? "0 0 10px rgba(120,150,255,0.35)"
+        : "none",
+  }),
 
-  subtitulo: {
+  subtitulo: (tema) => ({
     textAlign: "center",
     marginBottom: "32px",
     fontSize: "15px",
-    color: "#c7d8ff",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#444",
+  }),
 
   form: {
     display: "flex",
@@ -150,33 +158,39 @@ const styles = {
     gap: "12px",
   },
 
-  icon: {
+  icon: (tema) => ({
     fontSize: "18px",
-    color: "#aab4ff",
-  },
+    color: tema === "escuro" ? "#aab4ff" : "#333",
+  }),
 
-  input: {
+  input: (tema) => ({
     flex: 1,
     padding: "14px 16px",
     borderRadius: "12px",
     border: "1px solid rgba(110,140,255,0.25)",
-    background: "rgba(10,15,33,0.8)",
-    color: "#fff",
+    background:
+      tema === "escuro"
+        ? "rgba(10,15,33,0.8)"
+        : "#ffffff",
+    color: tema === "escuro" ? "#fff" : "#000",
     outline: "none",
     fontSize: "15px",
-  },
+  }),
 
-  textarea: {
+  textarea: (tema) => ({
     minHeight: "130px",
     padding: "14px 16px",
     borderRadius: "12px",
     border: "1px solid rgba(110,140,255,0.25)",
-    background: "rgba(10,15,33,0.8)",
-    color: "#fff",
+    background:
+      tema === "escuro"
+        ? "rgba(10,15,33,0.8)"
+        : "#ffffff",
+    color: tema === "escuro" ? "#fff" : "#000",
     outline: "none",
     resize: "none",
     fontSize: "15px",
-  },
+  }),
 
   btn: {
     marginTop: "12px",
@@ -198,7 +212,7 @@ const styles = {
     gap: "16px",
   },
 
-  link: {
+  link: (tema) => ({
     flex: 1,
     display: "flex",
     alignItems: "center",
@@ -209,11 +223,11 @@ const styles = {
     textDecoration: "none",
     fontWeight: "600",
     background: "rgba(255,255,255,0.05)",
-    color: "#c7d8ff",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
     border: "1px solid rgba(110,140,255,0.2)",
     transition: "0.25s ease",
     boxShadow: "0 0 8px rgba(120,150,255,0.2)",
-  },
+  }),
 
   linkHover: {
     transform: "translateY(-4px)",
