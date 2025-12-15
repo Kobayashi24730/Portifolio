@@ -27,7 +27,7 @@ export default function Footer() {
         </a>
       </div>
 
-      <p style={styles.text}>
+      <p style={styles.text(tema)}>
         © {new Date().getFullYear()} Kobayashi Dev • Todos os direitos reservados
       </p>
     </footer>
@@ -42,13 +42,13 @@ const styles = {
     background:
       tema === "escuro"
         ? "linear-gradient(180deg, rgba(5,8,20,0.95), rgba(10,15,30,0.9))"
-        : "linear-gradient(180deg, rgba(255,255,255,0.9), rgba(245,245,245,0.9))",
+        : "linear-gradient(180deg, #ffffff, #f2f2f2)",
 
     backdropFilter: "blur(14px)",
 
     borderTop:
       tema === "escuro"
-        ? "1px solid rgba(0,180,255,0.15)"
+        ? "1px solid rgba(120,150,255,0.2)"
         : "1px solid rgba(0,0,0,0.1)",
 
     boxShadow:
@@ -56,7 +56,7 @@ const styles = {
         ? "0 -10px 30px rgba(0,0,0,0.45)"
         : "0 -6px 20px rgba(0,0,0,0.12)",
 
-    color: tema === "escuro" ? "#b8c7e0" : "#333",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
   }),
 
   icons: {
@@ -68,17 +68,19 @@ const styles = {
   },
 
   link: (tema) => ({
-    color: tema === "escuro" ? "#b8c7e0" : "#333",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
     transition: "0.3s ease",
+
     textShadow:
       tema === "escuro"
-        ? "0 0 8px rgba(0,180,255,0.35)"
+        ? "0 0 8px rgba(120,150,255,0.45)"
         : "none",
   }),
 
-  text: {
+  text: (tema) => ({
     margin: 0,
     fontSize: "14px",
     letterSpacing: "0.8px",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 };
