@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
 import MeuCurriculo from "../assets/imgs/MeuCurriculo.svg";
@@ -28,7 +28,6 @@ export default function Home() {
     document.head.appendChild(styleSheet);
   }, []);
   
-  
   const items = [
     { nome: "Contato", link: "/contato" },
     { nome: "Sobre", link: "/sobre" },
@@ -36,7 +35,7 @@ export default function Home() {
 
   return (
     <div style={styles.div(tema)}>
-      <h1 style={styles.titulo}>Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.</h1>
+      <h1 style={styles.titulo(tema)}>Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.</h1>
 
       <div style={styles.options}>
         {items.map((item) => (
@@ -45,7 +44,7 @@ export default function Home() {
             to={item.link}
             style={{
               ...styles.botao,
-              ...(hovered === item.nome ? styles.hovered : {})
+              ...(hovered === item.nome ? styles.hovered : {}),
             }}
             onMouseEnter={() => setHovered(item.nome)}
             onMouseLeave={() => setHovered(null)}
@@ -57,7 +56,7 @@ export default function Home() {
         <button 
           style={{
             ...styles.btnCurriculo,
-            ...(hovered === "curriculo" ? styles.hoveredCurriculo : {})
+            ...(hovered === "curriculo" ? styles.hoveredCurriculo : {}),
           }}
           onMouseEnter={() => setHovered("curriculo")}
           onMouseLeave={() => setHovered(null)}
@@ -69,14 +68,12 @@ export default function Home() {
 
       {curriculoAberto && (
         <div style={styles.curriculoBox}>
-          
-          {/* Barra idêntica à da foto */}
           <div style={styles.githubBar(tema)}>
             <button
               onClick={() => setAbaAtiva("codigo")}
               style={{
                 ...styles.aba(tema),
-                ...(abaAtiva === "codigo" ? styles.abaAtiva(tema) : {})
+                ...(abaAtiva === "codigo" ? styles.abaAtiva(tema) : {}),
               }}
             >
               Código
@@ -86,7 +83,7 @@ export default function Home() {
               onClick={() => setAbaAtiva("culpa")}
               style={{
                 ...styles.aba(tema),
-                ...(abaAtiva === "culpa" ? styles.abaAtiva : {})
+                ...(abaAtiva === "culpa" ? styles.abaAtiva : {}),
               }}
             >
               Culpa
@@ -121,23 +118,22 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     gap: "40px",
-
     background:
       tema === "escuro"
         ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
         : "linear-gradient(135deg, #e7e7e7, #ffffff)",
-
     transition: "0.3s ease",
   }),
 
-  titulo: {
+  titulo: (tema) => ({
     maxWidth: "900px",
     textAlign: "center",
     fontSize: "2.4rem",
     lineHeight: "1.4",
     textShadow: "0 0 10px rgba(120,150,255,0.35)",
     animation: "fadeIn 0.9s ease",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
   options: {
     display: "flex",
@@ -188,7 +184,6 @@ const styles = {
     background: "rgba(255,255,255,0.06)",
     backdropFilter: "blur(12px)",
     border: "1px solid rgba(120,150,255,0.25)",
-
     boxShadow: "0 0 25px rgba(120,150,255,0.25)",
     overflow: "hidden",
     animation: "fadeZoom 0.7s ease-out forwards",
@@ -207,7 +202,6 @@ const styles = {
     backdropFilter: "blur(10px)",
   }),
 
-  
   aba: (tema) => ({
     padding: "8px 16px",
     borderRadius: "8px",
@@ -232,7 +226,6 @@ const styles = {
         : "0 0 10px rgba(180,180,180,0.4)",
   }),
 
-  
   btnDownload: {
     marginLeft: "auto",
     padding: "8px 18px",
