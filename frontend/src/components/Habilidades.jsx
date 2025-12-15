@@ -1,214 +1,136 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import TemaContext from "./TemaContext";
-
 import {
   FaHtml5,
   FaCss3Alt,
+  FaJs,
   FaReact,
+  FaNodeJs,
   FaPython,
-  FaCode,
   FaJava,
 } from "react-icons/fa";
-
 import {
   SiTypescript,
   SiFlutter,
   SiDotnet,
   SiCplusplus,
-  SiXml,
+  SiC,
+  SiXamarin,
+  SiMongodb,
+  SiMysql,
 } from "react-icons/si";
-
-import { MdOutlineSmartToy } from "react-icons/md";
 
 export default function Habilidades() {
   const { tema } = useContext(TemaContext);
-  const [hovered, setHovered] = useState(null);
 
-  const HabilidadesLista = [
-    {
-      titulo: "HTML",
-      text: "Estruturação semântica e acessível para a web.",
-      icon: <FaHtml5 size={42} color="#e34c26" />,
-    },
-    {
-      titulo: "CSS",
-      text: "Design moderno, responsivo e animado.",
-      icon: <FaCss3Alt size={42} color="#264de4" />,
-    },
-    {
-      titulo: "JavaScript / TypeScript",
-      text: "Aplicações dinâmicas, escaláveis e performáticas.",
-      icon: <SiTypescript size={42} color="#3178c6" />,
-    },
-    {
-      titulo: "React / Node / AJAX",
-      text: "SPAs, APIs e aplicações completas.",
-      icon: <FaReact size={42} color="#61dbfb" />,
-    },
-    {
-      titulo: "Flutter",
-      text: "Apps modernos para Android e iOS.",
-      icon: <SiFlutter size={42} color="#5fc8f8" />,
-    },
-    {
-      titulo: "Python",
-      text: "APIs, automação e análise de dados.",
-      icon: <FaPython size={42} color="#ffd343" />,
-    },
-    {
-      titulo: "API REST",
-      text: "Comunicação segura entre sistemas.",
-      icon: <FaCode size={42} color="#aab4ff" />,
-    },
-    {
-      titulo: ".NET MAUI / Xamarin",
-      text: "Apps multiplataforma com C#.",
-      icon: <SiDotnet size={42} color="#512bd4" />,
-    },
-    {
-      titulo: "C / C++",
-      text: "Desempenho, lógica e baixo nível.",
-      icon: <SiCplusplus size={42} color="#00599c" />,
-    },
-    {
-      titulo: "Java",
-      text: "POO e aplicações robustas.",
-      icon: <FaJava size={42} color="#e06c00" />,
-    },
-    {
-      titulo: "XML",
-      text: "Estruturação e integração de dados.",
-      icon: <SiXml size={42} color="#f1c40f" />,
-    },
-    {
-      titulo: "IA & Automação",
-      text: "Soluções inteligentes aplicadas a sistemas reais.",
-      icon: <MdOutlineSmartToy size={42} color="#aab4ff" />,
-    },
+  const habilidades = [
+    { nome: "HTML5", icon: <FaHtml5 /> },
+    { nome: "CSS3", icon: <FaCss3Alt /> },
+    { nome: "JavaScript", icon: <FaJs /> },
+    { nome: "TypeScript", icon: <SiTypescript /> },
+    { nome: "React / React Native", icon: <FaReact /> },
+    { nome: "Node.js", icon: <FaNodeJs /> },
+    { nome: "Python", icon: <FaPython /> },
+    { nome: "Java", icon: <FaJava /> },
+    { nome: ".NET MAUI", icon: <SiDotnet /> },
+    { nome: "Xamarin", icon: <SiXamarin /> },
+    { nome: "Flutter", icon: <SiFlutter /> },
+    { nome: "C", icon: <SiC /> },
+    { nome: "C++", icon: <SiCplusplus /> },
+    { nome: "API RESTful", icon: <SiMongodb /> },
+    { nome: "SQL / MySQL", icon: <SiMysql /> },
   ];
 
   return (
-    <>
-      <style>
-        {`
-          @keyframes fadeUp {
-            from {
-              opacity: 0;
-              transform: translateY(18px) scale(0.96);
-              filter: blur(4px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-              filter: blur(0);
-            }
-          }
-        `}
-      </style>
+    <section style={styles.section(tema)}>
+      <h2 style={styles.title(tema)}>Habilidades</h2>
 
-      <section style={styles.container(tema)}>
-        <div style={styles.header}>
-          <h1 style={styles.title}>Habilidades</h1>
-          <p style={styles.subtitle}>
-            Tecnologias que utilizo para criar soluções modernas e eficientes.
-          </p>
-        </div>
+      <p style={styles.description(tema)}>
+        Atuo no desenvolvimento de aplicações modernas, utilizando tecnologias
+        web, mobile e backend. Tenho experiência com APIs REST, integração de
+        sistemas, aplicações multiplataforma e boas práticas de código.
+      </p>
 
-        <div style={styles.grid}>
-          {HabilidadesLista.map((item) => (
-            <div
-              key={item.titulo}
-              style={{
-                ...styles.card(tema),
-                ...(hovered === item.titulo ? styles.cardHover(tema) : {}),
-              }}
-              onMouseEnter={() => setHovered(item.titulo)}
-              onMouseLeave={() => setHovered(null)}
-              onTouchStart={() => setHovered(item.titulo)}
-              onTouchEnd={() => setHovered(null)}
-            >
-              <div style={styles.icon}>{item.icon}</div>
-              <h3 style={styles.cardTitle}>{item.titulo}</h3>
-              <p style={styles.cardText}>{item.text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </>
+      <div style={styles.grid}>
+        {habilidades.map((hab) => (
+          <div key={hab.nome} style={styles.card(tema)}>
+            <span style={styles.icon(tema)}>{hab.icon}</span>
+            <span style={styles.name(tema)}>{hab.nome}</span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
 const styles = {
-  container: (tema) => ({
-    minHeight: "100vh",
-    padding: "70px 20px",
+  section: (tema) => ({
+    padding: "60px 20px",
+    textAlign: "center",
+
     background:
       tema === "escuro"
-        ? "radial-gradient(circle at top, #0a0f21 0%, #04040a 70%)"
-        : "linear-gradient(135deg, #e7e7e7, #ffffff)",
-    color: tema === "escuro" ? "#fff" : "#000",
-    transition: "0.3s ease",
+        ? "linear-gradient(180deg, rgba(10,15,30,0.95), rgba(5,8,20,0.9))"
+        : "linear-gradient(180deg, #ffffff, #f2f2f2)",
+
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
   }),
 
-  header: {
-    maxWidth: "900px",
-    margin: "0 auto 55px",
-    textAlign: "center",
-  },
+  title: (tema) => ({
+    fontSize: "32px",
+    marginBottom: "14px",
+    letterSpacing: "1px",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
-  title: {
-    fontSize: "2.6rem",
-    fontWeight: "800",
-    color: "#c7d8ff",
-    textShadow: "0 0 12px rgba(120,150,255,0.45)",
-    marginBottom: "10px",
-  },
-
-  subtitle: {
-    fontSize: "16px",
-    color: "#aab4ff",
-  },
+  description: (tema) => ({
+    maxWidth: "700px",
+    margin: "0 auto 40px",
+    fontSize: "15px",
+    lineHeight: "1.6",
+    color: tema === "escuro" ? "#a9b9e6" : "#000",
+  }),
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "30px",
-    maxWidth: "1200px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+    gap: "20px",
+    maxWidth: "900px",
     margin: "0 auto",
   },
 
   card: (tema) => ({
-    padding: "28px",
-    borderRadius: "18px",
-    background: "rgba(255,255,255,0.06)",
-    backdropFilter: "blur(12px)",
-    border: "1px solid rgba(120,150,255,0.25)",
-    boxShadow: "0 0 20px rgba(120,150,255,0.18)",
-    textAlign: "center",
-    transition: "0.35s cubic-bezier(.4,0,.2,1)",
-    animation: "fadeUp 0.6s ease forwards",
+    padding: "18px",
+    borderRadius: "14px",
+
+    background:
+      tema === "escuro"
+        ? "rgba(15,25,50,0.6)"
+        : "rgba(255,255,255,0.9)",
+
+    border:
+      tema === "escuro"
+        ? "1px solid rgba(120,150,255,0.25)"
+        : "1px solid rgba(0,0,0,0.1)",
+
+    boxShadow:
+      tema === "escuro"
+        ? "0 0 20px rgba(120,150,255,0.15)"
+        : "0 6px 18px rgba(0,0,0,0.12)",
+
+    transition: "0.3s ease",
   }),
 
-  cardHover: (tema) => ({
-    transform: "translateY(-10px) scale(1.05)",
-    boxShadow: "0 0 35px rgba(90,120,255,0.45)",
-    borderColor: "rgba(150,180,255,0.45)",
-    background: "rgba(255,255,255,0.12)",
-  }),
-
-  icon: {
-    marginBottom: "14px",
-  },
-
-  cardTitle: {
-    fontSize: "20px",
-    fontWeight: "700",
+  icon: (tema) => ({
+    fontSize: "34px",
+    display: "block",
     marginBottom: "8px",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
-  cardText: {
-    fontSize: "14.5px",
-    lineHeight: "1.5",
-    color: "#d5ddff",
-  },
+  name: (tema) => ({
+    fontSize: "14px",
+    letterSpacing: "0.8px",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 };
