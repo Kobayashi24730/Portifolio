@@ -1,10 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const { tema, setTema } = useContext(TemaContext);
   const [hovered, setHovered] = useState(null);
+  const [menuAberto, setMenuAberto] = useState(false);
 
   useEffect(() => {
     document.body.style.margin = "0";
@@ -22,13 +24,11 @@ export default function Navbar() {
 
   return (
     <nav style={styles.nav(tema)}>
-      <div style={styles.divTitle}>
-        <h2 style={styles.title}>Kobayashi</h2>
-      </div>
+      <h2 style={styles.title(tema)}>Kobayashi</h2>
 
       <ul style={styles.ul}>
         {items.map((item) => (
-          <li key={item.nome} style={styles.li}>
+          <li key={item.nome}>
             <Link
               to={item.link}
               style={{
@@ -52,12 +52,36 @@ export default function Navbar() {
         ))}
       </ul>
 
-      <button
-        onClick={() => setTema(tema === "escuro" ? "claro" : "escuro")}
-        style={styles.btn(tema)}
-      >
-        {tema === "escuro" ? "Light" : "Dark"}
-      </button>
+      <div style={styles.actions}>
+        <button
+          onClick={() => setTema(tema === "escuro" ? "claro" : "escuro")}
+          style={styles.btnTema(tema)}
+        >
+          {tema === "escuro" ? "Light" : "Dark"}
+        </button>
+
+        <button
+          style={styles.hamburger(tema)}
+          onClick={() => setMenuAberto(!menuAberto)}
+        >
+          {menuAberto ? <FaTimes /> : <FaBars />}
+        </button>
+      </div>
+
+      {menuAberto && (
+        <div style={styles.menuMobile(tema)}>
+          {items.map((item) => (
+            <Link
+              key={item.nome}
+              to={item.link}
+              style={styles.itemMobile(tema)}
+              onClick={() => setMenuAberto(false)}
+            >
+              {item.nome}
+            </Link>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }
@@ -70,61 +94,47 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "14px 40px",
+    padding: "14px 24px",
 
     background:
       tema === "escuro"
-        ? "linear-gradient(180deg, rgba(10,15,30,0.9), rgba(5,8,20,0.85))"
-        : "linear-gradient(180deg, rgba(255,255,255,0.8), rgba(245,245,245,0.8))",
+        ? "linear-gradient(180deg, rgba(10,15,30,0.95), rgba(5,8,20,0.9))"
+        : "linear-gradient(180deg, #ffffff, #f2f2f2)",
 
     backdropFilter: "blur(14px)",
 
     borderBottom:
       tema === "escuro"
-        ? "1px solid rgba(0,180,255,0.12)"
-        : "1px solid rgba(0,0,0,0.08)",
+        ? "1px solid rgba(0,180,255,0.15)"
+        : "1px solid rgba(0,0,0,0.12)",
 
     boxShadow:
       tema === "escuro"
         ? "0 10px 30px rgba(0,0,0,0.45)"
-        : "0 8px 25px rgba(0,0,0,0.1)",
+        : "0 8px 25px rgba(0,0,0,0.15)",
   }),
 
-  divTitle: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
-
-  img: {
-    width: "42px",
-    height: "42px",
-    filter: "drop-shadow(0 0 6px rgba(0,180,255,0.4))",
-  },
-
-  title: {
+  title: (tema) => ({
     margin: 0,
-    fontWeight: 600,
+    fontWeight: 700,
     letterSpacing: "1px",
-    color: "#b8c7e0",
-  },
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
 
   ul: {
     listStyle: "none",
     display: "flex",
-    gap: "32px",
+    gap: "28px",
   },
-
-  li: {},
 
   item: (tema) => ({
     position: "relative",
     textDecoration: "none",
     fontSize: "15px",
     letterSpacing: "1px",
-    color: tema === "escuro" ? "#b8c7e0" : "#333",
-    transition: "0.3s ease",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
     paddingBottom: "6px",
+    transition: "0.3s ease",
   }),
 
   itemHovered: (tema) => ({
@@ -146,25 +156,62 @@ const styles = {
     transition: "0.3s ease",
   },
 
-  btn: (tema) => ({
+  actions: {
+    display: "flex",
+    gap: "14px",
+    alignItems: "center",
+  },
+
+  btnTema: (tema) => ({
     background:
       tema === "escuro"
         ? "linear-gradient(135deg, #1a2a4f, #0f172a)"
-        : "#ddd",
-    color: tema === "escuro" ? "#e6f1ff" : "#000",
-    border:
-      tema === "escuro"
-        ? "1px solid rgba(0,180,255,0.3)"
-        : "1px solid rgba(0,0,0,0.2)",
-    padding: "8px 18px",
-    borderRadius: "20px",
+        : "#e0e0e0",
+    color: tema === "escuro" ? "#fff" : "#000",
+    border: "none",
+    padding: "8px 16px",
+    borderRadius: "18px",
     cursor: "pointer",
     fontSize: "14px",
-    letterSpacing: "1px",
-    transition: "0.3s",
-    boxShadow:
-      tema === "escuro"
-        ? "0 0 15px rgba(0,180,255,0.35)"
-        : "none",
   }),
+
+  hamburger: (tema) => ({
+    display: "none",
+    background: "transparent",
+    border: "none",
+    fontSize: "22px",
+    cursor: "pointer",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
+
+  menuMobile: (tema) => ({
+    position: "absolute",
+    top: "64px",
+    right: "20px",
+    background:
+      tema === "escuro"
+        ? "rgba(10,15,30,0.95)"
+        : "#ffffff",
+    borderRadius: "12px",
+    padding: "16px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "14px",
+    boxShadow: "0 15px 30px rgba(0,0,0,0.25)",
+  }),
+
+  itemMobile: (tema) => ({
+    textDecoration: "none",
+    fontWeight: "600",
+    color: tema === "escuro" ? "#c7d8ff" : "#000",
+  }),
+
+  "@media (max-width: 768px)": {
+    ul: {
+      display: "none",
+    },
+    hamburger: {
+      display: "block",
+    },
+  },
 };
