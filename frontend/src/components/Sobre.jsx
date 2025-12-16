@@ -7,39 +7,63 @@ export default function Sobre() {
 
   const estagio = [
     {
-      titulo: "Automação de sistema de monitoramento em tempo real",
+      titulo: "Automação de Sistema de Monitoramento em Tempo Real",
       descricao:
-        "Utilizei C/C++, Node.js e Java para criar um sistema que detecta anomalias e movimentos suspeitos, enviando alertas automáticos ao administrador.",
-      imagem: "/estagio/monitoramento.png",
-      github: "https://github.com/seuuser",
+        "Desenvolvimento de um sistema em C/C++, Node.js e Java para detecção de anomalias e movimentos suspeitos, com envio automático de alertas ao administrador.",
+      imagem: "../assets/imgs/estagio1",
+      github: "https://github.com/Kobayashi24730",
       demo: "#",
     },
     {
-      titulo: "Sistema de mapeamento de terreno",
+      titulo: "Sistema de Mapeamento de Terreno",
       descricao:
-        "Projeto desenvolvido em C, C++ e C#, com testes em campo. Premiado em primeiro lugar em competição técnica.",
-      imagem: "/estagio/mapeamento.png",
-      github: "https://github.com/seuuser",
+        "Projeto desenvolvido em C, C++ e C#, incluindo testes em campo. O sistema foi premiado com o primeiro lugar em uma competição técnica.",
+      imagem: "../assets/imgs/estagio2",
+      github: "https://github.com/Kobayashi24730",
       demo: "#",
     },
     {
-      titulo: "Monitoramento e processamento de dados agrícolas",
+      titulo: "Monitoramento e Processamento de Dados Agrícolas",
       descricao:
-        "Sistema com C/C++, Python, React, JavaScript, Flutter, jQuery e AJAX, exibindo dados em dashboards administrativos.",
-      imagem: "/estagio/agricola.png",
-      github: "https://github.com/seuuser",
+        "Sistema completo utilizando C/C++, Python, React, JavaScript, Flutter, jQuery e AJAX, com exibição de dados em dashboards administrativos interativos.",
+      imagem: "../assets/imgs/estagio3",
+      github: "https://github.com/Kobayashi24730",
       demo: "#",
     },
     {
-      titulo: "Aplicativo de alertas agrícolas",
+      titulo: "Aplicativo de Alertas Agrícolas",
       descricao:
-        "Aplicação mobile e desktop usando XML/Java e .NET MAUI/Xamarin com área administrativa segura.",
-      imagem: "/estagio/alertas.png",
-      github: "https://github.com/seuuser",
+        "Aplicação mobile e desktop desenvolvida com XML/Java e .NET MAUI/Xamarin, contando com uma área administrativa segura para gerenciamento de dados.",
+      imagem: "../assets/imgs/estagio4",
+      github: "https://github.com/Kobayashi24730",
+      demo: "#",
+    },
+    {
+      titulo: "Desenvolvimento de Site de Livros",
+      descricao:
+        "Aplicação web desenvolvida com HTML, CSS, JavaScript, jQuery e PHP, apresentando uma interface moderna e responsiva. Permite que usuários publiquem livros e conta com funcionalidades administrativas.",
+      imagem: "../assets/imgs/estagio5",
+      github: "https://github.com/Kobayashi24730",
+      demo: "#",
+    },
+    {
+      titulo: "Aplicação Web com Inteligência Artificial",
+      descricao:
+        "Desenvolvimento de uma aplicação web moderna e responsiva utilizando React, JavaScript, TypeScript e Python. O sistema responde perguntas dos usuários com base em livros pré-definidos e pesquisas na web.",
+      imagem: "../assets/imgs/estagio6",
+      github: "https://github.com/Kobayashi24730",
+      demo: "#",
+    },
+    {
+      titulo: "Criação de E-commerce para Venda de Produtos",
+      descricao:
+        "Aplicação web responsiva desenvolvida com React, JavaScript, TypeScript, Python e PHP, incluindo checkout via Pix e WhatsApp, além de um painel administrativo para gerenciamento de produtos.",
+      imagem: "../assets/imgs/estagio7",
+      github: "https://github.com/Kobayashi24730",
       demo: "#",
     },
   ];
-
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
