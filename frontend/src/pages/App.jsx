@@ -16,6 +16,7 @@ export default function App() {
       <TemaContext.Provider value={{ tema, setTema }}>
         <Navbar />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/Lar" element={<Home />} />
           <Route path="/Sobre" element={<Sobre />} />
           <Route path="/Habilidades" element={<Habilidades />} />
