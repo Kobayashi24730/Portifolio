@@ -15,7 +15,6 @@ import {
   SiDotnet,
   SiCplusplus,
   SiC,
-  SiXamarin,
   SiMongodb,
   SiMysql,
 } from "react-icons/si";
@@ -33,7 +32,7 @@ export default function Habilidades() {
     { nome: "Python", icon: <FaPython /> },
     { nome: "Java", icon: <FaJava /> },
     { nome: ".NET MAUI", icon: <SiDotnet /> },
-    { nome: "Xamarin", icon: <SiXamarin /> },
+    { nome: "Xamarin", icon: <SiDotnet /> },
     { nome: "Flutter", icon: <SiFlutter /> },
     { nome: "C", icon: <SiC /> },
     { nome: "C++", icon: <SiCplusplus /> },
