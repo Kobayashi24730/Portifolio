@@ -1,20 +1,23 @@
-import { useContext, useState, useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
-import MeuCurriculo from "../assets/imgs/curriculo.pdf";
+
 import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/AnnotationLayer.css";
-import "react-pdf/dist/esm/Page/TextLayer.css";
-pdfjs.GlobalWorkerOptions.workerSrc =
-  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import "pdfjs-dist/web/pdf_viewer.css";
+
+// Worker do PDF (OBRIGATÓRIO no Vite/Render)
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
 
 export default function Home() {
   const { tema } = useContext(TemaContext);
+
   const [curriculoAberto, setCurriculoAberto] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [abaAtiva, setAbaAtiva] = useState("codigo");
   const [numPages, setNumPages] = useState(null);
-  const [pagina, setPagina] = useState(1);
 
   const BaixaCurriculo = () => {
     window.open("/curriculo.pdf", "_blank");
@@ -22,9 +25,6 @@ export default function Home() {
 
   useEffect(() => {
     const styleSheet = document.createElement("style");
-    const preload = new Image();
-    preload.src = "/assets/imgs/curriculo.pdf";
-    
     styleSheet.innerText = `
       @keyframes fadeZoom {
         0% { opacity: 0; transform: translateY(14px) scale(0.94); filter: blur(4px); }
@@ -34,7 +34,7 @@ export default function Home() {
     `;
     document.head.appendChild(styleSheet);
   }, []);
-  
+
   const items = [
     { nome: "Contato", link: "/contato" },
     { nome: "Sobre", link: "/sobre" },
@@ -42,7 +42,9 @@ export default function Home() {
 
   return (
     <div style={styles.div(tema)}>
-      <h1 style={styles.titulo(tema)}>Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.</h1>
+      <h1 style={styles.titulo}>
+        Olá! Sou um desenvolvedor mobile/web com foco em backends rápidos e modernos.
+      </h1>
 
       <div style={styles.options}>
         {items.map((item) => (
@@ -60,7 +62,7 @@ export default function Home() {
           </Link>
         ))}
 
-        <button 
+        <button
           style={{
             ...styles.btnCurriculo,
             ...(hovered === "curriculo" ? styles.hoveredCurriculo : {}),
@@ -75,6 +77,7 @@ export default function Home() {
 
       {curriculoAberto && (
         <div style={styles.curriculoBox}>
+          {/* Barra superior */}
           <div style={styles.githubBar(tema)}>
             <button
               onClick={() => setAbaAtiva("codigo")}
@@ -90,59 +93,42 @@ export default function Home() {
               onClick={() => setAbaAtiva("culpa")}
               style={{
                 ...styles.aba(tema),
-                ...(abaAtiva === "culpa" ? styles.abaAtiva : {}),
+                ...(abaAtiva === "culpa" ? styles.abaAtiva(tema) : {}),
               }}
             >
               Culpa
             </button>
 
-            <button
-              style={styles.btnDownload}
-              onClick={BaixaCurriculo}
-            >
+            <button style={styles.btnDownload} onClick={BaixaCurriculo}>
               ⬇️ Baixar
             </button>
           </div>
 
-          <div style={{ padding: "20px", display: "flex", justifyContent: "center" }}>
-  <Document
-    file="/curriculo.pdf"
-    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-  >
-    <Page
-      pageNumber={pagina}
-      scale={1.25}
-      renderTextLayer
-      renderAnnotationLayer
-    />
-  </Document>
-</div>
-
-{/* Controles */}
-<div style={{ display: "flex", justifyContent: "center", gap: 12, paddingBottom: 16 }}>
-  <button
-    disabled={pagina <= 1}
-    onClick={() => setPagina(p => p - 1)}
-  >
-    ⬅️
-  </button>
-
-  <span>
-    {pagina} / {numPages}
-  </span>
-
-  <button
-    disabled={pagina >= numPages}
-    onClick={() => setPagina(p => p + 1)}
-  >
-    ➡️
-  </button>
-</div>
+          {/* PDF */}
+          <div style={styles.pdfContainer}>
+            <Document
+              file="/curriculo.pdf"
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              loading="Carregando currículo..."
+            >
+              {Array.from(new Array(numPages), (_, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                  width={800}
+                />
+              ))}
+            </Document>
+          </div>
         </div>
       )}
     </div>
   );
 }
+
+/* ================== STYLES ================== */
 
 const styles = {
   div: (tema) => ({
@@ -161,15 +147,13 @@ const styles = {
     transition: "0.3s ease",
   }),
 
-  titulo: (tema) => ({
+  titulo: {
     maxWidth: "900px",
     textAlign: "center",
     fontSize: "2.4rem",
     lineHeight: "1.4",
     textShadow: "0 0 10px rgba(120,150,255,0.35)",
-    animation: "fadeIn 0.9s ease",
-    color: tema === "escuro" ? "#c7d8ff" : "#000",
-  }),
+  },
 
   options: {
     display: "flex",
@@ -183,17 +167,14 @@ const styles = {
     borderRadius: "12px",
     textDecoration: "none",
     background: "rgba(255,255,255,0.05)",
-    backdropFilter: "blur(6px)",
     color: "#c7d8ff",
     border: "1px solid rgba(110,140,255,0.2)",
     transition: "0.25s ease",
-    boxShadow: "0 0 8px rgba(120,150,255,0.2)",
   },
 
   hovered: {
     transform: "translateY(-4px)",
     background: "rgba(255,255,255,0.18)",
-    boxShadow: "0 0 25px rgba(90,120,255,0.35)",
   },
 
   btnCurriculo: {
@@ -202,80 +183,63 @@ const styles = {
     background: "linear-gradient(135deg, #2563eb, #4589ff)",
     color: "#fff",
     border: "none",
-    fontSize: "1.05rem",
     fontWeight: "600",
-    transition: "0.25s ease",
-    boxShadow: "0 0 12px rgba(37, 99, 235, 0.5)",
+    cursor: "pointer",
   },
 
   hoveredCurriculo: {
-    transform: "scale(1.07)",
-    boxShadow: "0 0 28px rgba(37, 99, 235, 0.8)",
+    transform: "scale(1.05)",
   },
 
   curriculoBox: {
-    width: "90%",
+    width: "95%",
     maxWidth: "950px",
     borderRadius: "14px",
     background: "rgba(255,255,255,0.06)",
-    backdropFilter: "blur(12px)",
     border: "1px solid rgba(120,150,255,0.25)",
-    boxShadow: "0 0 25px rgba(120,150,255,0.25)",
     overflow: "hidden",
-    animation: "fadeZoom 0.7s ease-out forwards",
+    animation: "fadeZoom 0.6s ease-out forwards",
   },
 
   githubBar: (tema) => ({
     background: tema === "escuro" ? "rgba(15,15,20,0.7)" : "#e5e5e5",
-    padding: "12px 14px",
+    padding: "12px",
     display: "flex",
     alignItems: "center",
-    gap: "12px",
+    gap: "10px",
     borderBottom:
       tema === "escuro"
         ? "1px solid rgba(120,150,255,0.2)"
         : "1px solid #ccc",
-    backdropFilter: "blur(10px)",
   }),
 
-  aba: (tema) => ({
+  aba: () => ({
     padding: "8px 16px",
     borderRadius: "8px",
-    fontSize: "0.95rem",
     background: "transparent",
-    color: tema === "escuro" ? "#aab4ff" : "#333",
-    border: "1px solid transparent",
+    border: "none",
     cursor: "pointer",
-    transition: "0.2s ease",
   }),
 
-  abaAtiva: (tema) => ({
-    background: tema === "escuro" ? "rgba(120,150,255,0.16)" : "#d4d4d4",
-    color: tema === "escuro" ? "#fff" : "#000",
-    border:
-      tema === "escuro"
-        ? "1px solid rgba(150,180,255,0.35)"
-        : "1px solid #999",
-    boxShadow:
-      tema === "escuro"
-        ? "0 0 12px rgba(120,150,255,0.4)"
-        : "0 0 10px rgba(180,180,180,0.4)",
+  abaAtiva: () => ({
+    background: "rgba(120,150,255,0.2)",
+    fontWeight: "600",
   }),
 
   btnDownload: {
     marginLeft: "auto",
-    padding: "8px 18px",
-    background: "linear-gradient(135deg, #fff, #ddd)",
+    padding: "8px 16px",
     borderRadius: "8px",
-    fontWeight: "700",
     cursor: "pointer",
-    transition: "0.2s ease",
     border: "none",
+    fontWeight: "600",
   },
 
-  curriculoIMG: {
-    width: "100%",
-    display: "block",
-    animation: "fadeZoom 0.8s ease-out forwards",
+  pdfContainer: {
+    padding: "20px",
+    display: "flex",
+    justifyContent: "center",
+    overflowY: "auto",
+    maxHeight: "80vh",
   },
 };
