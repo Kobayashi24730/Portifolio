@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
-import MeuCurriculo from "../assets/imgs/MeuCurriculo.svg";
+import MeuCurriculo from "../assets/imgs/curriculo.pdf";
 
 export default function Home() {
   const { tema } = useContext(TemaContext);
