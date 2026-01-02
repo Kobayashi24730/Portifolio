@@ -2,12 +2,19 @@ import { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import TemaContext from "./TemaContext";
 import MeuCurriculo from "../assets/imgs/curriculo.pdf";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
+pdfjs.GlobalWorkerOptions.workerSrc =
+  `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 export default function Home() {
   const { tema } = useContext(TemaContext);
   const [curriculoAberto, setCurriculoAberto] = useState(false);
   const [hovered, setHovered] = useState(null);
   const [abaAtiva, setAbaAtiva] = useState("codigo");
+  const [numPages, setNumPages] = useState(null);
+  const [pagina, setPagina] = useState(1);
 
   const BaixaCurriculo = () => {
     window.open("/curriculo.pdf", "_blank");
@@ -97,11 +104,40 @@ export default function Home() {
             </button>
           </div>
 
-          <img
-            src={MeuCurriculo}
-            alt="Currículo"
-            style={styles.curriculoIMG}
-          />
+          <div style={{ padding: "20px", display: "flex", justifyContent: "center" }}>
+  <Document
+    file="/curriculo.pdf"
+    onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+  >
+    <Page
+      pageNumber={pagina}
+      scale={1.25}
+      renderTextLayer
+      renderAnnotationLayer
+    />
+  </Document>
+</div>
+
+{/* Controles */}
+<div style={{ display: "flex", justifyContent: "center", gap: 12, paddingBottom: 16 }}>
+  <button
+    disabled={pagina <= 1}
+    onClick={() => setPagina(p => p - 1)}
+  >
+    ⬅️
+  </button>
+
+  <span>
+    {pagina} / {numPages}
+  </span>
+
+  <button
+    disabled={pagina >= numPages}
+    onClick={() => setPagina(p => p + 1)}
+  >
+    ➡️
+  </button>
+</div>
         </div>
       )}
     </div>
