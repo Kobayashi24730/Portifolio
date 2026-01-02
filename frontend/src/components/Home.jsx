@@ -19,7 +19,7 @@ export default function Home() {
   const [numPages, setNumPages] = useState(null);
 
   const BaixaCurriculo = () => {
-    window.open("../assets/img/curriculo.pdf", "_blank");
+    window.open("curriculo.pdf", "_blank");
   };
 
   useEffect(() => {
