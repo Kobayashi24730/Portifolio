@@ -106,7 +106,7 @@ export default function Home() {
           {/* PDF */}
           <div style={styles.pdfContainer}>
             <Document
-              file="/curriculo.pdf"
+              file={`${window.location.origin}/curriculo.pdf`}
               onLoadSuccess={({ numPages }) => setNumPages(numPages)}
               loading="Carregando currículo..."
             >
