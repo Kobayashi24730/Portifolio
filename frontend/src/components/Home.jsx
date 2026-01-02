@@ -5,7 +5,6 @@ import TemaContext from "./TemaContext";
 import { Document, Page, pdfjs } from "react-pdf";
 import "pdfjs-dist/web/pdf_viewer.css";
 
-// Worker do PDF (OBRIGATÓRIO no Vite/Render)
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
@@ -20,7 +19,7 @@ export default function Home() {
   const [numPages, setNumPages] = useState(null);
 
   const BaixaCurriculo = () => {
-    window.open("/curriculo.pdf", "_blank");
+    window.open("../assets/img/curriculo.pdf", "_blank");
   };
 
   useEffect(() => {
