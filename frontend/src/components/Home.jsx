@@ -127,7 +127,6 @@ export default function Home() {
   );
 }
 
-/* ================== STYLES ================== */
 
 const styles = {
   div: (tema) => ({
